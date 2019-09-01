@@ -306,7 +306,7 @@ export default function DetailedView() {
                     height={"100%"}
                     width={"100%"}
                     imageFit={ImageFit.center}
-                    src="http://placehold.it/800x300"
+                    src="https://source.unsplash.com/featured/"
                     alt="Example implementation of the property image fit using the center value on an image larger than the frame."
                 />
             </div>
@@ -315,11 +315,25 @@ export default function DetailedView() {
             </div>
             <div className="DetailedView-folders">
                 <Pivot
-                    linkFormat={PivotLinkFormat.tabs}
+                    styles={{
+                        root: { display: "flex" },
+                        link: {
+                            flex: 1,
+                            height: "74px"
+                        },
+                        linkIsSelected: {
+                            flex: 1,
+                            height: "74px"
+                        },
+                        linkContent: {
+                            overflow: "scroll"
+                        }
+                    }}
+                    linkFormat={PivotLinkFormat.links}
                     linkSize={PivotLinkSize.large}
                 >
                     <PivotItem headerText="Files">
-                        <CommandBar
+                        {/* <CommandBar
                             items={items}
                             overflowItems={overflowItems}
                             overflowButtonProps={{ ariaLabel: "More" }}
@@ -327,7 +341,7 @@ export default function DetailedView() {
                             ariaLabel={
                                 "Use left and right arrow keys to navigate between commands"
                             }
-                        />
+                        /> */}
                         <FilesGrid />
                     </PivotItem>
                     <PivotItem headerText="History">
