@@ -11,7 +11,7 @@ import { ImageFit } from 'office-ui-fabric-react/lib/Image';
 
 export default function CreativeCard(props) {
     const { creative } = props;
-    const { name, author, type, preview } = creative;
+    const { name, author, preview } = creative;
 
     return (
         <DocumentCard className="CreativeCard" onClickHref="#">
