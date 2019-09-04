@@ -1,11 +1,12 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
+import { withPrefix } from 'gatsby';
 
 export default function NavBar() {
   return (
     <Navbar className="Navbar justify-content-between" expand="lg">
-      <Navbar.Brand className="Navbar-brand" href="/">Arkitech</Navbar.Brand>
+      <Navbar.Brand className="Navbar-brand" href={withPrefix("/")}>Arkitech</Navbar.Brand>
       <SearchBox
           underlined
           placeholder="Search"
