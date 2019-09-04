@@ -1,0 +1,8 @@
+.FilesList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 280px);
+    grid-gap: 16px;
+    overflow: scroll;
+    margin: 8px;
+    justify-content: center;
+}
