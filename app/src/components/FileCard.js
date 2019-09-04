@@ -1,34 +1,16 @@
 import React from "react";
 import { ImageFit } from "office-ui-fabric-react/lib/Image";
-import Image24Icon from '@atlaskit/icon-file-type/glyph/image/24';
 
 import {
     DocumentCard,
     DocumentCardActivity,
     DocumentCardTitle,
-    DocumentCardDetails,
     DocumentCardLocation,
     DocumentCardPreview,
     DocumentCardActions
 } from "office-ui-fabric-react/lib/DocumentCard";
 
-export default function Files(props) {
-    return <FilesGrid />;
-}
-
-export function FilesGrid() {
-    return (
-        <div className="FilesGrid">
-            {Array.from(new Array(parseInt(Math.random() * 20))).map(
-                (_, idx) => (
-                    <FileCard key={idx} idx={idx} className="FilesGrid-item" />
-                )
-            )}
-        </div>
-    );
-}
-
-function FileCard(props) {
+export default function FileCard(props) {
     const previewProps = {
         previewImages: [
             {
@@ -39,7 +21,7 @@ function FileCard(props) {
                     Math.random(),
                 width: 300,
                 height: 200,
-                iconSrc: "",
+                iconSrc: `${process.env.PUBLIC_URL}/icons/image/24.svg`,
             }
         ]
     };
