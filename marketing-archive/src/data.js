@@ -24,6 +24,7 @@ export const CREATIVE = {
 export const FILE = {
     name: utils.getRandomName(),
     icon: "/icons/image/24.svg",
+    preview: { src: "https://source.unsplash.com/featured/?games,cartoon" },
     createdAt: new Date().toLocaleString(),
     updatedAt: new Date().toLocaleString(),
     author: AUTHOR,

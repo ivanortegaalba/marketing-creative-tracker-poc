@@ -11,24 +11,27 @@ import {
 } from "office-ui-fabric-react/lib/DocumentCard";
 
 export default function FileCard(props) {
-    const { onClick } = props;
+    const { onClick, file } = props;
     const previewProps = {
         previewImages: [
             {
-                name: "Revenue stream proposal fiscal year 2016 version02.pptx",
+                name: file.name,
                 imageFit: ImageFit.cover,
-                previewImageSrc:
-                    "https://source.unsplash.com/featured/?random=" +
-                    Math.random(),
+                previewImageSrc: file.preview.src,
                 width: 300,
                 height: 200,
-                iconSrc: `/icons/image/24.svg`
+                iconSrc: file.icon
             }
         ]
     };
 
     return (
-        <DocumentCard className={props.className} onClick={onClick}>
+        <DocumentCard
+            className={props.className}
+            onClick={ev => {
+                onClick(ev);
+            }}
+        >
             <DocumentCardPreview {...previewProps} />
             <DocumentCardTitle
                 title={`Banner_test_${props.idx}.png`}
