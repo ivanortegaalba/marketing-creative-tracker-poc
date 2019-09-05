@@ -5,3 +5,5 @@ export { default as FilesList } from './FilesList';
 export { default as FileCard } from './FileCard';
 export { default as FilesCommandBar } from './FilesCommandBar';
 export { default as Metadata } from './Metadata';
+export { default as TagList } from './TagList';
+export { default as FileDetailsPanel } from './FileDetailsPanel';

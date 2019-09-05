@@ -10,28 +10,31 @@ import { Text } from "office-ui-fabric-react/lib/Text";
 import { FilesList, Metadata } from "..";
 import utils from "../../utils";
 
-const creative = {
-    id: 1,
-    name: utils.toTitleCase(utils.getRandomName()),
-    type: {
-        name: "Banner"
-    },
-    author: {
-        name: "Marta Colombas",
-        avatar:
-            "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light"
-    },
-    preview: {
-        src: `https://source.unsplash.com/featured/?games,cartoon`
-    }
-};
-
 export default function DetailedView() {
+    const CREATIVE = {
+        id: 1,
+        name: utils.toTitleCase(utils.getRandomName()),
+        type: {
+            name: "Banner"
+        },
+        project: {
+            name: utils.toTitleCase(utils.getRandomName())
+        },
+        author: {
+            name: "Marta Colombas",
+            avatar:
+                "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light"
+        },
+        preview: {
+            src: `https://source.unsplash.com/featured/?games,cartoon`
+        }
+    };
+
     return (
         <div className="DetailedView">
             <div className="DetailedView-header">
                 <Text variant={"xxLarge"} nowrap>
-                    {creative.name}
+                    {CREATIVE.name}
                 </Text>
             </div>
             <div className="DetailedView-preview">

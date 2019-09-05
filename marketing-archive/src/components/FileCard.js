@@ -11,6 +11,7 @@ import {
 } from "office-ui-fabric-react/lib/DocumentCard";
 
 export default function FileCard(props) {
+    const { onClick } = props;
     const previewProps = {
         previewImages: [
             {
@@ -21,13 +22,13 @@ export default function FileCard(props) {
                     Math.random(),
                 width: 300,
                 height: 200,
-                iconSrc: `/icons/image/24.svg`,
+                iconSrc: `/icons/image/24.svg`
             }
         ]
     };
 
     return (
-        <DocumentCard className={props.className}>
+        <DocumentCard className={props.className} onClick={onClick}>
             <DocumentCardPreview {...previewProps} />
             <DocumentCardTitle
                 title={`Banner_test_${props.idx}.png`}
@@ -49,7 +50,7 @@ export default function FileCard(props) {
                 ]}
             />
             <DocumentCardLocation
-                location={`Version ${parseInt(Math.random() * 10) }`}
+                location={`Version ${parseInt(Math.random() * 10)}`}
                 locationHref="#"
                 ariaLabel="Location, Marketing Documents"
             />
