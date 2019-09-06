@@ -17,14 +17,14 @@ export const CREATIVE = {
     },
     author: AUTHOR,
     preview: {
-        src: `https://source.unsplash.com/featured/?games,cartoon`
+        src: `https://images.unsplash.com/photo-1567623047423-eebe1e011f70?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9`
     }
 };
 
 export const FILE = {
     name: utils.getRandomName(),
     icon: "/icons/image/24.svg",
-    preview: { src: "https://source.unsplash.com/featured/?games,cartoon" },
+    preview: { src: "https://images.unsplash.com/photo-1567623047423-eebe1e011f70?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9" },
     createdAt: new Date().toLocaleString(),
     updatedAt: new Date().toLocaleString(),
     author: AUTHOR,
