@@ -8,33 +8,16 @@ import {
 } from "office-ui-fabric-react/lib/Pivot";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { FilesList, Metadata } from "..";
-import utils from "../../utils";
+import { creative as getCreative} from "../../data";
 
 export default function DetailedView() {
-    const CREATIVE = {
-        id: 1,
-        name: utils.toTitleCase(utils.getRandomName()),
-        type: {
-            name: "Banner"
-        },
-        project: {
-            name: utils.toTitleCase(utils.getRandomName())
-        },
-        author: {
-            name: "Marta Colombas",
-            avatar:
-                "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light"
-        },
-        preview: {
-            src: `https://images.unsplash.com/photo-1567623047423-eebe1e011f70?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9`
-        }
-    };
+    const creative = getCreative();
 
     return (
         <div className="DetailedView">
             <div className="DetailedView-header">
                 <Text variant={"xxLarge"} nowrap>
-                    {CREATIVE.name}
+                    {creative.name}
                 </Text>
             </div>
             <div className="DetailedView-preview">
@@ -47,7 +30,7 @@ export default function DetailedView() {
                 />
             </div>
             <div className="DetailedView-metadata">
-                <Metadata />
+                <Metadata creative={creative} />
             </div>
             <div className="DetailedView-folders">
                 <Pivot
@@ -69,7 +52,7 @@ export default function DetailedView() {
                     linkSize={PivotLinkSize.large}
                 >
                     <PivotItem headerText="Files">
-                        <FilesList />
+                        <FilesList creative={creative} />
                     </PivotItem>
                     <PivotItem headerText="History">
                         <span>Pivot #2</span>

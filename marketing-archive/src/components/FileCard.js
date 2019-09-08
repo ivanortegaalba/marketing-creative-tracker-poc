@@ -10,6 +10,9 @@ import {
     DocumentCardActions
 } from "office-ui-fabric-react/lib/DocumentCard";
 
+const PREVIEW_WIDTH = 300;
+const PREVIEW_HEIGHT = 200;
+
 export default function FileCard(props) {
     const { onClick, file } = props;
     const previewProps = {
@@ -18,9 +21,9 @@ export default function FileCard(props) {
                 name: file.name,
                 imageFit: ImageFit.cover,
                 previewImageSrc: file.preview.src,
-                width: 300,
-                height: 200,
-                iconSrc: file.icon
+                width: PREVIEW_WIDTH,
+                height: PREVIEW_HEIGHT,
+                iconSrc: file.fileType.icon.medium
             }
         ]
     };
@@ -33,29 +36,18 @@ export default function FileCard(props) {
             }}
         >
             <DocumentCardPreview {...previewProps} />
-            <DocumentCardTitle
-                title={`Banner_test_${props.idx}.png`}
-                shouldTruncate={true}
-            />
+            <DocumentCardTitle title={file.name} />
             <DocumentCardActivity
                 activity="Created a few minutes ago"
-                people={[
-                    {
-                        name: "Marta Colombas",
-                        profileImageSrc:
-                            "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light"
-                    },
-                    {
-                        name: "Ivan Ortega",
-                        profileImageSrc:
-                            "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light"
-                    }
-                ]}
+                people={file.authors.map(author => ({
+                    name: author.name,
+                    profileImageSrc: author.avatar
+                }))}
             />
             <DocumentCardLocation
                 location={`Version ${parseInt(Math.random() * 10)}`}
                 locationHref="#"
-                ariaLabel="Location, Marketing Documents"
+                ariaLabel="Version"
             />
             <DocumentCardActions
                 actions={[
@@ -68,6 +60,14 @@ export default function FileCard(props) {
                         iconProps: { iconName: "Share" },
 
                         ariaLabel: "share action"
+                    },
+                    {
+                        iconProps: { iconName: "Info" },
+                        ariaLabel: "Image Info",
+                        onClick: e => {
+                            e.stopPropagation();
+                            onClick(e);
+                        }
                     },
                     {
                         menuIconProps: {

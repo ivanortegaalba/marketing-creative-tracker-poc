@@ -188,10 +188,22 @@ var NOUNS = [
     "woodworkers"
 ];
 
-export function getRandomName() {
+function getRandomName() {
     return `${ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]} ${
         NOUNS[Math.floor(Math.random() * NOUNS.length)]
     }`;
+}
+
+function getRandomNumber(limit = 100) {
+    return Math.floor(Math.random() * limit);
+}
+
+function getRandomFromArray(array = []) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
+function getRandomFromObject(object) {
+    return object[getRandomFromArray(Object.keys(object))];
 }
 
 function toTitleCase(str) {
@@ -204,8 +216,19 @@ function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function toSnakeCase(str) {
+    return str
+    .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+    .map(x => x.toLowerCase())
+    .join('_');;
+}
+
 export default {
     getRandomName,
+    getRandomNumber,
+    getRandomFromArray,
+    getRandomFromObject,
     toTitleCase,
-    capitalize
+    capitalize,
+    toSnakeCase
 };

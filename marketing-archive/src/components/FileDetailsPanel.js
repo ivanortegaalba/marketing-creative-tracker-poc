@@ -8,13 +8,12 @@ import {
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { Persona, PersonaSize } from "office-ui-fabric-react/lib/Persona";
 import { ActivityItem } from "office-ui-fabric-react/lib/ActivityItem";
-import { Icon, IconType } from "office-ui-fabric-react/lib/Icon";
 import { Panel, PanelType } from "office-ui-fabric-react/lib/Panel";
 import { Stack, Label, Link } from "office-ui-fabric-react";
 import { TagList } from ".";
 
 export default function FileDetailsPanel(props) {
-    const { isOpen, onDismiss, file } = props;
+    const { isOpen, onDismiss, file, creative } = props;
 
     return (
         <Panel
@@ -39,11 +38,9 @@ export default function FileDetailsPanel(props) {
                         >
                             <Stack.Item>
                                 <Stack>
-                                    <Text variant="large">
-                                        Banner_test_0.png
-                                    </Text>
-                                    <Text variant="medium">PNG File</Text>
-                                    <Text variant="medium">200x200</Text>
+                                    <Text variant="large">{file.name}</Text>
+                                    <Text variant="medium">{`${file.fileType.name}`}</Text>
+                                    <Text variant="medium">{`${file.dimensions.width}x${file.dimensions.height}`}</Text>
                                 </Stack>
                             </Stack.Item>
                             <Stack.Item align="center">
@@ -70,7 +67,7 @@ export default function FileDetailsPanel(props) {
                         linkSize={PivotLinkSize.large}
                     >
                         <PivotItem headerText="Info">
-                            <FileInfo file={file} />
+                            <FileInfo file={file} creative={creative} />
                         </PivotItem>
                         <PivotItem headerText="History">
                             <History file={file} />
@@ -82,7 +79,7 @@ export default function FileDetailsPanel(props) {
     );
 }
 
-function FileInfo({ file }) {
+function FileInfo({ file, creative }) {
     return (
         <Stack
             verticalAlign="space-between"
@@ -96,22 +93,22 @@ function FileInfo({ file }) {
             <Stack.Item>
                 <Label>Author</Label>
                 <Persona
-                    imageUrl={file.author.avatar}
-                    imageInitials={file.author.name
+                    imageUrl={file.authors[0].avatar}
+                    imageInitials={file.authors[0].name
                         .split(" ")
                         .map(s => s[0].toUpperCase())}
-                    text={file.author.name}
+                    text={file.authors[0].name}
                     secondaryText={file.createdAt}
                     size={PersonaSize.size40}
                 />
             </Stack.Item>
             <Stack.Item>
                 <Label>Size</Label>
-                <Text>500 MB</Text>
+                <Text>{file.size}</Text>
             </Stack.Item>
             <Stack.Item>
                 <Label>Extension</Label>
-                <Text>png</Text>
+                <Text>{file.fileType.extension}</Text>
             </Stack.Item>
             <Stack.Item>
                 <Label>JIRA ticket</Label>
@@ -123,11 +120,11 @@ function FileInfo({ file }) {
             </Stack.Item>
             <Stack.Item>
                 <Label>Creative Type</Label>
-                <Text>{file.creative.type.name}</Text>
+                <Text>{creative.type.name}</Text>
             </Stack.Item>
             <Stack.Item>
                 <Label>Project</Label>
-                <Text>{file.creative.project.name}</Text>
+                <Text>{creative.project.name}</Text>
             </Stack.Item>
             <Stack.Item>
                 <Label>Tags</Label>
@@ -144,36 +141,28 @@ function History({ file }) {
             verticalFill
             grow
             tokens={{
-                padding: "8px",
+                padding: "16px 8px",
                 childrenGap: "16px"
             }}
         >
             <ActivityItem
                 activityDescription={
                     <Fragment>
-                        <Link>Marta Colombas</Link>
+                        <Link>{file.authors[0].name}</Link>
                         <span> created the </span>
                         <Link>version 2</Link> of
-                        <Link> Banner_test_0.png</Link>
+                        <Link> {file.name}</Link>
                     </Fragment>
                 }
-                // activityIcon={
-                //     <Icon
-                //         iconType={IconType.image}
-                //         imageProps={{
-                //             src: '/icons/image/24.svg',
-                //         }}
-                //     />
-                // }
                 activityPersonas={[
-                    { imageUrl: "/icons/image/24.svg" },
-                    { imageUrl: file.author.avatar },
+                    { imageUrl: file.fileType.icon.small },
+                    { imageUrl: file.authors[1].avatar }
                 ]}
                 comments={
                     <Fragment>
                         <span style={{ fontStyle: "italic" }}>
-                            Upload the first stable version of the banner in
-                            200x200
+                            Upload the first stable version of the banner with
+                            the product requirement
                         </span>
                     </Fragment>
                 }
@@ -182,27 +171,27 @@ function History({ file }) {
             <ActivityItem
                 activityDescription={
                     <Fragment>
-                        <Link>Ivan Ortega</Link>
+                        <Link>{file.authors[0].name}</Link>
                         <span> renamed </span>
-                        <Link>first_upload.png</Link> to
-                        <Link> Banner_test_0.png</Link>
+                        <Link>first_upload.png</Link> to {" "}
+                        <Link> {file.name}</Link>
                     </Fragment>
                 }
-                activityPersonas={[{ imageUrl: file.author.avatar }]}
+                activityPersonas={[{ imageUrl: file.authors[0].avatar }]}
                 timeStamp="1h ago"
             />
             <ActivityItem
                 activityDescription={
                     <Fragment>
-                        <Link>Ivan Ortega</Link>
+                        <Link>{file.authors[0].name}</Link>
                         <span> created the </span>
                         <Link>version 1</Link> of
                         <Link> first_upload.png</Link>
                     </Fragment>
                 }
                 activityPersonas={[
-                    { imageUrl: "/icons/image/24.svg" },
-                    { imageUrl: file.author.avatar },
+                    { imageUrl: file.fileType.icon.small },
+                    { imageUrl: file.authors[0].avatar }
                 ]}
                 timeStamp="2 days ago"
             />
