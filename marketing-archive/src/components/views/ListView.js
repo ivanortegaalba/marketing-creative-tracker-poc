@@ -57,17 +57,43 @@ const farItems = [
         iconProps: {
             iconName: "SortLines"
         },
-        onClick: () => console.log("Sort")
+        subMenuProps: {
+            items: [
+                {
+                    key: "Name",
+                    name: "Name"
+                },
+                {
+                    key: "Most popular",
+                    name: "Most popular"
+                },
+                {
+                    key: "Newest Updated",
+                    name: "Newest Updated"
+                },
+                {
+                    key: "Older Updated",
+                    name: "Oldest Updated"
+                },
+                {
+                    key: "Newest Created",
+                    name: "Newest Created"
+                },
+                {
+                    key: "Older Created",
+                    name: "Oldest Created"
+                }
+            ]
+        }
     },
     {
         key: "tile",
-        name: "Grid view",
-        ariaLabel: "Grid view",
+        name: "List view",
+        ariaLabel: "List view",
         iconProps: {
             iconName: "Tiles"
         },
-        iconOnly: true,
-        onClick: () => console.log("Tiles")
+        iconOnly: true
     },
     {
         key: "help",
@@ -76,8 +102,7 @@ const farItems = [
         iconProps: {
             iconName: "Info"
         },
-        iconOnly: true,
-        onClick: () => console.log("Help clicked!")
+        iconOnly: true
     }
 ];
 
@@ -103,10 +128,4 @@ export default function ListView() {
             </Grid>
         </Fragment>
     );
-}
-
-function toTitleCase(str) {
-    return str.replace(/\w\S*/g, function(txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
 }
