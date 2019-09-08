@@ -1,5 +1,5 @@
 import React from "react";
-import { navigate } from "gatsby"
+import { navigate } from "gatsby";
 import {
     DocumentCard,
     DocumentCardActivity,
@@ -12,30 +12,31 @@ import { ImageFit } from "office-ui-fabric-react/lib/Image";
 
 export default function CreativeCard(props) {
     const { creative } = props;
-    const { name, author, preview } = creative;
 
     return (
         <DocumentCard
             className="CreativeCard"
             onClick={e => {
                 e.stopPropagation();
-                navigate("/creative")
+                navigate("/creative");
             }}
         >
             <DocumentCardImage
                 height={150}
                 imageFit={ImageFit.cover}
-                imageSrc={preview.src}
+                imageSrc={creative.preview.src}
             />
             <DocumentCardDetails>
-                <DocumentCardTitle title={name} shouldTruncate />
+                <DocumentCardTitle title={creative.name} shouldTruncate />
             </DocumentCardDetails>
             <DocumentCardActivity
-                activity="Modified March 13, 2018"
-                people={[
-                    { name: author.name, profileImageSrc: author.avatar },
-                    { name: author.name, profileImageSrc: author.avatar }
-                ]}
+                activity={creative.updatedAt}
+                people={creative.authors.map(author => {
+                    return {
+                        name: author.name,
+                        profileImageSrc: author.avatar
+                    };
+                })}
             />
             <DocumentCardActions
                 actions={[

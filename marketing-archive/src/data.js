@@ -51,8 +51,7 @@ export const ICON_SIZES = {
 
 export function fileType() {
     const fileType = utils.getRandomFromArray(FILE_TYPES);
-    console.log(fileType);
-    console.log(FILE_TYPES);
+
     return {
         id: fileType.id,
         name: utils.toTitleCase(fileType.id.replace("-", " ")),
@@ -77,12 +76,12 @@ export function file() {
     return {
         name: `${utils.toSnakeCase(utils.getRandomName())}.${type.extension}`,
         fileType: type,
-        size: `${utils.getRandomNumber(1000)} MB` ,
+        size: `${utils.getRandomNumber(1000)} MB`,
         preview: {
             src: `https://picsum.photos/${dimensions.width}/${dimensions.height}.jpg`
         },
-        createdAt: new Date().toLocaleString(),
-        updatedAt: new Date().toLocaleString(),
+        createdAt: createdAt(),
+        updatedAt: updatedAt(),
         authors: COLLABORATORS,
         dimensions,
         dpi: "300"
@@ -107,6 +106,8 @@ export function creative() {
         id: utils.getRandomNumber(),
         name: utils.toTitleCase(utils.getRandomName()),
         description: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+        createdAt: createdAt(),
+        updatedAt: updatedAt(),
         type: creativeType(),
         project: project(),
         collection: utils.capitalize(utils.getRandomName()),
@@ -116,4 +117,28 @@ export function creative() {
         },
         files
     };
+}
+
+function createdAt() {
+    const options = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+    };
+
+    return new Date().toLocaleDateString("en-EN", options);
+}
+
+function updatedAt() {
+    const options = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+    };
+
+    return new Date().toLocaleDateString("en-EN", options);
 }
