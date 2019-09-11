@@ -18,9 +18,9 @@ import { Button } from "react-bootstrap";
 export default function FileOverview(props) {
     const { isOpen, onDismiss, file, creative, changeFile } = props;
     const theme = getTheme();
-    const currentIndexFile = creative.files.findIndex(
-        file => file.name === file.name
-    );
+    const currentIndexFile = file
+        ? creative.files.findIndex(f => f.name === file.name)
+        : null;
 
     const [cursor, moveCursor] = useState(currentIndexFile);
 
@@ -40,6 +40,8 @@ export default function FileOverview(props) {
                 break;
             case "ArrowLeft":
                 prevFile();
+                break;
+            default:
                 break;
         }
     }
