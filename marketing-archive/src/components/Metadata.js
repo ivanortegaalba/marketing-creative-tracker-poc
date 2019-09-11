@@ -44,15 +44,17 @@ export default function Metadata({ creative }) {
             <Stack.Item>
                 <Label>Sizes:</Label>
                 <Text>
-                    {creative.files.map(
-                        ({ dimensions }) =>
-                            `${dimensions.width}x${dimensions.height}`
-                    ).join(', ')}
+                    {creative.files
+                        .map(
+                            ({ dimensions }) =>
+                                `${dimensions.width}x${dimensions.height}`
+                        )
+                        .join(", ")}
                 </Text>
             </Stack.Item>
             <Stack.Item>
                 <Label>Tags:</Label>
-                <TagList />
+                <TagList tags={creative.tags} />
             </Stack.Item>
         </Stack>
     );

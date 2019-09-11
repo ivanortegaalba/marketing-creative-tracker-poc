@@ -128,7 +128,7 @@ function FileInfo({ file, creative }) {
             </Stack.Item>
             <Stack.Item>
                 <Label>Tags</Label>
-                <TagList />
+                <TagList tags={file.tags}/>
             </Stack.Item>
         </Stack>
     );

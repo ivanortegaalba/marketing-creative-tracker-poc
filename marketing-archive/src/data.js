@@ -10,6 +10,109 @@ export const OTHER_AUTHOR = {
     name: "Ivan Ortega"
 };
 
+export const TAGS = [
+    "adamant",
+    "adroit",
+    "amatory",
+    "animistic",
+    "antic",
+    "arcadian",
+    "baleful",
+    "bellicose",
+    "bilious",
+    "boorish",
+    "calamitous",
+    "caustic",
+    "cerulean",
+    "comely",
+    "concomitant",
+    "contumacious",
+    "corpulent",
+    "crapulous",
+    "defamatory",
+    "didactic",
+    "dilatory",
+    "dowdy",
+    "efficacious",
+    "effulgent",
+    "egregious",
+    "endemic",
+    "equanimous",
+    "execrable",
+    "fastidious",
+    "feckless",
+    "fecund",
+    "friable",
+    "fulsome",
+    "garrulous",
+    "guileless",
+    "gustatory",
+    "heuristic",
+    "histrionic",
+    "hubristic",
+    "incendiary",
+    "insidious",
+    "insolent",
+    "intransigent",
+    "inveterate",
+    "invidious",
+    "irksome",
+    "jejune",
+    "jocular",
+    "judicious",
+    "lachrymose",
+    "limpid",
+    "loquacious",
+    "luminous",
+    "mannered",
+    "mendacious",
+    "meretricious",
+    "minatory",
+    "mordant",
+    "munificent",
+    "nefarious",
+    "noxious",
+    "obtuse",
+    "parsimonious",
+    "pendulous",
+    "pernicious",
+    "pervasive",
+    "petulant",
+    "platitudinous",
+    "precipitate",
+    "propitious",
+    "puckish",
+    "querulous",
+    "quiescent",
+    "rebarbative",
+    "recalcitant",
+    "redolent",
+    "rhadamanthine",
+    "risible",
+    "ruminative",
+    "sagacious",
+    "salubrious",
+    "sartorial",
+    "sclerotic",
+    "serpentine",
+    "spasmodic",
+    "strident",
+    "taciturn",
+    "tenacious",
+    "tremulous",
+    "trenchant",
+    "turbulent",
+    "turgid",
+    "ubiquitous",
+    "uxorious",
+    "verdant",
+    "voluble",
+    "voracious",
+    "wheedling",
+    "withering",
+    "zealous"
+];
+
 export const COLLABORATORS = [AUTHOR, OTHER_AUTHOR];
 
 export function author() {
@@ -84,7 +187,8 @@ export function file() {
         updatedAt: updatedAt(),
         authors: COLLABORATORS,
         dimensions,
-        dpi: "300"
+        dpi: "300",
+        tags: tags()
     };
 }
 
@@ -102,6 +206,7 @@ export function creative() {
         file
     );
 
+
     return {
         id: utils.getRandomNumber(),
         name: utils.toTitleCase(utils.getRandomName()),
@@ -115,7 +220,8 @@ export function creative() {
         preview: {
             src: files[0].preview.src
         },
-        files
+        files,
+        tags: tags()
     };
 }
 
@@ -141,4 +247,10 @@ function updatedAt() {
     };
 
     return new Date().toLocaleDateString("en-EN", options);
+}
+
+function tags(){
+    const nTags = utils.getRandomNumber(15);
+
+    return Array.from(new Set(Array.from(new Array(nTags)).map(_ => TAGS[utils.getRandomNumber(TAGS.length)])))
 }
