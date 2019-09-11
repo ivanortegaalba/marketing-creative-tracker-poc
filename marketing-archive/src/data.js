@@ -98,7 +98,7 @@ export function project() {
 }
 
 export function creative() {
-    const files = Array.from(new Array(utils.getRandomNumber(20) + 1)).map(
+    const files = Array.from(new Array(utils.getRandomNumber(10) + 10)).map(
         file
     );
 
