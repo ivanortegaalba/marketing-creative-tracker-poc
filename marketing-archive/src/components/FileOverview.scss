@@ -1,0 +1,21 @@
+.FileOverview {
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+    grid-template-areas:
+        "preview  aside"
+        "preview aside"
+        "preview  aside";
+
+    &-preview {
+        grid-area: preview;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    &-sidebar {
+        grid-area: aside;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+}

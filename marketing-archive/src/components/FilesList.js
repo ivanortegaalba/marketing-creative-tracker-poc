@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { FileCard, FileDetailsPanel } from ".";
+import { FileCard, FileDetailsPanel, FileOverview } from ".";
 
 export default function FilesList({ creative }) {
     const [openedFile, openFile] = useState(null);
@@ -23,6 +23,13 @@ export default function FilesList({ creative }) {
                 onDismiss={() => openFile(null)}
                 creative={creative}
                 file={openedFile}
+                isOpen={false}
+            />
+            <FileOverview
+                onDismiss={() => openFile(null)}
+                creative={creative}
+                file={openedFile}
+                changeFile={openFile}
                 isOpen={!!openedFile}
             />
         </Fragment>

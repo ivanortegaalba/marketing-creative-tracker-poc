@@ -7,3 +7,4 @@ export { default as FilesCommandBar } from './FilesCommandBar';
 export { default as Metadata } from './Metadata';
 export { default as TagList } from './TagList';
 export { default as FileDetailsPanel } from './FileDetailsPanel';
+export { default as FileOverview } from './FileOverview';

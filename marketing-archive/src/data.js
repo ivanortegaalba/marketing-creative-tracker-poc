@@ -206,7 +206,6 @@ export function creative() {
         file
     );
 
-
     return {
         id: utils.getRandomNumber(),
         name: utils.toTitleCase(utils.getRandomName()),
@@ -225,32 +224,46 @@ export function creative() {
     };
 }
 
-function createdAt() {
+export function createdAt() {
     const options = {
         year: "numeric",
         month: "short",
         day: "numeric",
         hour: "numeric",
-        minute: "numeric",
+        minute: "numeric"
     };
 
     return new Date().toLocaleDateString("en-EN", options);
 }
 
-function updatedAt() {
+export function updatedAt() {
     const options = {
         year: "numeric",
         month: "short",
         day: "numeric",
         hour: "numeric",
-        minute: "numeric",
+        minute: "numeric"
     };
 
     return new Date().toLocaleDateString("en-EN", options);
 }
 
-function tags(){
+export function tags() {
     const nTags = utils.getRandomNumber(15);
 
-    return Array.from(new Set(Array.from(new Array(nTags)).map(_ => TAGS[utils.getRandomNumber(TAGS.length)])))
+    return Array.from(
+        new Set(
+            Array.from(new Array(nTags)).map(
+                _ => TAGS[utils.getRandomNumber(TAGS.length)]
+            )
+        )
+    );
+}
+
+export function image(width, height) {
+    if (width && height) {
+        return `https://picsum.photos/${width}/${height}.jpg`;
+    }
+
+    return `https://picsum.photos/`;
 }
