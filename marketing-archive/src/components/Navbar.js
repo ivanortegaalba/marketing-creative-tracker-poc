@@ -9,14 +9,29 @@ export default function NavBar() {
     const theme = getTheme();
 
     return (
-        <Navbar className="Navbar justify-content-between" expand="lg" style={{backgroundColor: theme.palette.themePrimary}}>
+        <Navbar
+            className="Navbar justify-content-between"
+            expand="lg"
+            style={{ backgroundColor: theme.palette.themePrimary }}
+        >
             <Navbar.Brand className="Navbar-brand">
-                <Link href={withPrefix("/")}>
+                <Link
+                    href={withPrefix("/")}
+                    styles={{
+                        root: {
+                            color: "white",
+                            selectors: {
+                                ":hover": {
+                                    color: theme.palette.white
+                                }
+                            }
+                        }
+                    }}
+                >
                     <Text
                         variant="xLarge"
                         styles={{
                             root: {
-                                color: "white",
                                 display: "flex",
                                 alignItems: "center"
                             }
@@ -25,7 +40,10 @@ export default function NavBar() {
                         <Icon
                             iconName={"WebAppBuilderFragment"}
                             styles={{
-                                root: { marginRight: "8px", fontSize: "24px" }
+                                root: {
+                                    marginRight: "8px",
+                                    fontSize: "24px"
+                                }
                             }}
                         />
                         Creative Archive > Game 1

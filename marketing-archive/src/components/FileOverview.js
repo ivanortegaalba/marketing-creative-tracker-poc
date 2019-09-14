@@ -185,12 +185,12 @@ export default function FileOverview(props) {
                     </div>
                     <aside className="FileOverview-sidebar">
                         <Stack verticalFill>
-                            <Text variant="large">{file.name}</Text>
-                            <Text variant="medium">{`${file.fileType.name}`}</Text>
-                            <Text variant="medium">{`${file.dimensions.width}x${file.dimensions.height}`}</Text>
-                            <Text variant="mediumPlus">
-                                <Link href="#">Version 2</Link>
-                            </Text>
+                            <Stack.Item>
+                                <Stack>
+                                    <Text variant="large">{file.name}</Text>
+                                    <Text variant="medium">{`${file.fileType.name}`}</Text>
+                                </Stack>
+                            </Stack.Item>
                             <Stack.Item verticalFill>
                                 <Pivot
                                     styles={{
@@ -457,7 +457,15 @@ function FileInfo({ file, creative }) {
                 />
             </Stack.Item>
             <Stack.Item>
+                <Label>Current version</Label>
+                <Text>{file.version}</Text>
+            </Stack.Item>
+            <Stack.Item>
                 <Label>Size</Label>
+                <Text variant="medium">{`${file.dimensions.width}x${file.dimensions.height}`}</Text>
+            </Stack.Item>
+            <Stack.Item>
+                <Label>File size</Label>
                 <Text>{file.size}</Text>
             </Stack.Item>
             <Stack.Item>

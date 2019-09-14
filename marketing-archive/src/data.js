@@ -180,6 +180,7 @@ export function file() {
     return {
         name: `${utils.toSnakeCase(utils.getRandomName())}.${type.extension}`,
         fileType: type,
+        version: utils.getRandomNumber(10) + 1,
         size: `${utils.getRandomNumber(1000)} MB`,
         preview: {
             src: `https://picsum.photos/${dimensions.width}/${dimensions.height}.jpg`
