@@ -20,7 +20,7 @@ import {
     ActionButton
 } from "office-ui-fabric-react";
 import { TagList } from ".";
-import { author, createdAt, AUTHOR } from "../data";
+import { author, createdAt, OTHER_AUTHOR } from "../data";
 
 const DEFAULT_COMMENTS = [
     {
@@ -44,7 +44,7 @@ const DEFAULT_COMMENTS = [
 ];
 
 function currentUser() {
-    return AUTHOR;
+    return OTHER_AUTHOR;
 }
 
 export default function FileOverview(props) {
@@ -153,13 +153,22 @@ export default function FileOverview(props) {
                                             theme.palette.neutralLighterAlt
                                     }
                                 }}
+                                verticalFill
                             >
-                                <ImageEditor
-                                    image={file.preview.src}
-                                    addAnnotation={addAnnotation}
-                                    annotations={annotations}
-                                    activeAnnotation={activeAnnotation}
-                                />
+                                <Stack
+                                    verticalFill
+                                    horizontalAlign="center"
+                                    verticalAlign="center"
+                                >
+                                    <Stack.Item grow={0}>
+                                        <ImageEditor
+                                            image={file.preview.src}
+                                            addAnnotation={addAnnotation}
+                                            annotations={annotations}
+                                            activeAnnotation={activeAnnotation}
+                                        />
+                                    </Stack.Item>
+                                </Stack>
                             </Stack.Item>
                             <Stack.Item>
                                 <IconButton
@@ -233,7 +242,6 @@ function ImageEditor({ image, annotations, addAnnotation, activeAnnotation }) {
 
     function onSubmit(annotation) {
         const { geometry, data } = annotation;
-        console.log(annotation);
         const newAnnotation = {
             geometry,
             data: {
@@ -248,9 +256,6 @@ function ImageEditor({ image, annotations, addAnnotation, activeAnnotation }) {
 
     return (
         <Annotation
-            style={{
-                height: "100%"
-            }}
             src={image}
             alt="Two pebbles anthropomorphized holding hands"
             annotations={annotations}
@@ -267,12 +272,7 @@ function ImageEditor({ image, annotations, addAnnotation, activeAnnotation }) {
     );
 }
 
-function Comments({
-    comments,
-    onSubmit,
-    setActiveAnnotation,
-    activeAnnotation
-}) {
+function Comments({ comments, onSubmit, setActiveAnnotation }) {
     const theme = getTheme();
     const [message, setMessage] = useState("");
 

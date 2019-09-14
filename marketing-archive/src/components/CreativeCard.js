@@ -1,5 +1,5 @@
 import React from "react";
-import { navigate, withPrefix } from "gatsby";
+import { navigate } from "gatsby";
 import {
     DocumentCard,
     DocumentCardActivity,
@@ -34,7 +34,7 @@ export default function CreativeCard(props) {
                 people={creative.authors.map(author => {
                     return {
                         name: author.name,
-                        profileImageSrc: withPrefix(author.avatar)
+                        profileImageSrc: author.avatar
                     };
                 })}
             />

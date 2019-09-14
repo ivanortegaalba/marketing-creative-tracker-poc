@@ -1,12 +1,13 @@
 import utils from "./utils";
+import { withPrefix } from "gatsby";
 
 export const AUTHOR = {
-    avatar: "/images/marta.jpeg",
+    avatar: withPrefix("/images/marta.jpeg"),
     name: "Marta Colombas"
 };
 
 export const OTHER_AUTHOR = {
-    avatar: "/images/ivan.jpeg",
+    avatar: withPrefix("/images/ivan.jpeg"),
     name: "Ivan Ortega"
 };
 
