@@ -2,12 +2,14 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { Text } from "office-ui-fabric-react/lib/Text";
-import { Icon, Link } from "office-ui-fabric-react";
+import { Icon, Link, getTheme } from "office-ui-fabric-react";
 import { withPrefix } from "gatsby";
 
 export default function NavBar() {
+    const theme = getTheme();
+
     return (
-        <Navbar className="Navbar justify-content-between" expand="lg">
+        <Navbar className="Navbar justify-content-between" expand="lg" style={{backgroundColor: theme.palette.themePrimary}}>
             <Navbar.Brand className="Navbar-brand">
                 <Link href={withPrefix("/")}>
                     <Text
