@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import {
     Pivot,
     PivotItem,
@@ -68,6 +68,15 @@ export default function FileOverview(props) {
         };
     });
 
+    useEffect(() => {
+        document.body.addEventListener("keydown", keyDown);
+
+        // returned function will be called on component unmount
+        return () => {
+            document.body.removeEventListener("keydown", keyDown);
+        };
+    });
+
     function keyDown(e) {
         switch (e.key) {
             case "ArrowRight":
@@ -104,7 +113,7 @@ export default function FileOverview(props) {
     }
 
     function addComment(comment) {
-        setComments([...comments, comment]);
+        setComments([comment, ...comments]);
     }
 
     function addAnnotation(annotation) {
@@ -193,8 +202,12 @@ export default function FileOverview(props) {
                             </Stack.Item>
                             <Stack.Item verticalFill>
                                 <Pivot
+                                    className="FileOverview-tabs"
                                     styles={{
-                                        root: { display: "flex" },
+                                        root: {
+                                            display: "flex",
+                                            height: "100%"
+                                        },
                                         link: {
                                             flex: 1
                                         },
@@ -202,7 +215,8 @@ export default function FileOverview(props) {
                                             flex: 1
                                         },
                                         linkContent: {
-                                            overflow: "scroll"
+                                            overflow: "scroll",
+                                            height: "100%"
                                         }
                                     }}
                                     linkFormat={PivotLinkFormat.links}
@@ -275,6 +289,7 @@ function ImageEditor({ image, annotations, addAnnotation, activeAnnotation }) {
 function Comments({ comments, onSubmit, setActiveAnnotation }) {
     const theme = getTheme();
     const [message, setMessage] = useState("");
+    const messagesEndRef = useRef(null);
 
     function send() {
         if (!message) {
@@ -288,34 +303,31 @@ function Comments({ comments, onSubmit, setActiveAnnotation }) {
         });
 
         setMessage("");
+
+        messagesEndRef.current &&
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
 
     return (
         <Stack
-            verticalAlign="space-between"
             verticalFill
-            grow
             tokens={{
-                padding: "16px 0",
+                padding: "8px 0",
                 childrenGap: "16px"
             }}
         >
-            <Stack.Item>
-                <Stack
-                    verticalAlign="space-between"
-                    verticalFill
-                    grow
-                    styles={{
-                        root: {
-                            border: `1px solid ${theme.semanticColors.bodyFrameDivider}`,
-                            overflow: "scroll",
-                            maxHeigh: "500px"
-                        },
-                        tokens: {
-                            borderBottom: "1px solid red"
-                        }
-                    }}
-                >
+            <Stack.Item
+                verticalFill
+                styles={{
+                    root: {
+                        flexBasis: "75%",
+                        overflow: "scroll",
+                        border: `1px solid ${theme.semanticColors.bodyFrameDivider}`,
+                        overflowAnchor: "none"
+                    }
+                }}
+            >
+                <Stack reversed>
                     {comments.map((comment, idx) => {
                         if (comment.annotation) {
                             const annotation = comment.annotation;

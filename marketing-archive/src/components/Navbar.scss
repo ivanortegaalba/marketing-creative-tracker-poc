@@ -1,7 +1,19 @@
 .Navbar {
-    background-color: #5516a6;
+    .ms-SearchBox,
+    .ms-SearchBox:hover {
+        background-color: transparent;
+        color: white;
+        min-width: 50%;
+        border-color: white;
+    }
+    .ms-SearchBox-icon {
+        color: white;
+    }
 
-    & &-brand {
+    .ms-SearchBox-field {
+        color: white;
+    }
+    .ms-SearchBox-field::placeholder {
         color: white;
     }
 }

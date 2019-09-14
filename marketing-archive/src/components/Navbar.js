@@ -4,6 +4,7 @@ import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { Icon, Link, getTheme } from "office-ui-fabric-react";
 import { withPrefix } from "gatsby";
+import { redirectTo } from "@reach/router";
 
 export default function NavBar() {
     const theme = getTheme();
@@ -54,6 +55,19 @@ export default function NavBar() {
                 underlined
                 placeholder="Search"
                 iconProps={{ iconName: "Search" }}
+                styles={{
+                    // root: {
+                    //     backgroundColor: "transparent",
+                    //     minWidth: "500px",
+                    //     color: "white",
+                    //     borderColor: "white",
+                    //     selectors: {
+                    //         ":hover": {
+                    //             borderColor: "white"
+                    //         }
+                    //     }
+                    // }
+                }}
             />
         </Navbar>
     );

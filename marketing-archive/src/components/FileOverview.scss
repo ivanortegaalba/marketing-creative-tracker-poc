@@ -18,4 +18,15 @@
         overflow-x: hidden;
         overflow-y: scroll;
     }
+
+    &-tabs {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        height: 100%;
+
+        div[role="tabpanel"],
+        div[role="tabpanel"] > div {
+            height: 100%;
+        }
+    }
 }
