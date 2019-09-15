@@ -1,20 +1,15 @@
 import React from "react";
-import {
-    DocumentCard,
-    DocumentCardActivity,
-    DocumentCardDetails,
-    DocumentCardPreview,
-    DocumentCardTitle,
-    DocumentCardType,
-    DocumentCardLocation
-} from "office-ui-fabric-react/lib/DocumentCard";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
-import { ImageFit } from "office-ui-fabric-react/lib/Image";
 import { getTheme } from "@uifabric/styling";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
+import { CompactFileCard } from ".";
 
-export default function CreativeHistory({ creative, onClickFile }) {
+export default function CreativeHistory({
+    creative,
+    onClickFile,
+    onClickFileInfo
+}) {
     const theme = getTheme();
 
     return (
@@ -40,6 +35,7 @@ export default function CreativeHistory({ creative, onClickFile }) {
                                 key={file.name}
                                 file={file}
                                 onClick={() => onClickFile(file)}
+                                onClickInfo={() => onClickFileInfo(file)}
                             />
                         );
                     })}
@@ -66,7 +62,7 @@ export default function CreativeHistory({ creative, onClickFile }) {
                 </Stack>
             </TimelineItem>
             <TimelineItem
-                key={"el1"}
+                key={"el2"}
                 dateText={"This week"}
                 style={{ color: theme.palette.themePrimary }}
                 dateInnerStyle={{
@@ -86,37 +82,5 @@ export default function CreativeHistory({ creative, onClickFile }) {
                 </Stack>
             </TimelineItem>
         </Timeline>
-    );
-}
-
-function CompactFileCard({ file, onClick }) {
-    return (
-        <DocumentCard type={DocumentCardType.compact} onClick={onClick}>
-            <DocumentCardPreview
-                previewImages={[
-                    {
-                        name: file.name,
-                        previewImageSrc: file.preview.src,
-                        iconSrc: file.fileType.icon.small,
-                        width: 144,
-                        height: 106,
-                        imageFit: ImageFit.cover
-                    }
-                ]}
-            />
-            <DocumentCardDetails>
-                <DocumentCardTitle title={file.name} shouldTruncate={true} />
-                <DocumentCardLocation location={`Version ${file.version}`} />
-                <DocumentCardActivity
-                    activity="Created a few minutes ago"
-                    people={[
-                        {
-                            profileImageSrc: file.authors[0].avatar,
-                            name: file.authors[0].name
-                        }
-                    ]}
-                />
-            </DocumentCardDetails>
-        </DocumentCard>
     );
 }

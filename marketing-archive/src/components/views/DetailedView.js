@@ -92,7 +92,7 @@ export default function DetailedView() {
                         />
                     </PivotItem>
                     <PivotItem itemKey="history">
-                        <CreativeHistory creative={creative} onClickFile={openFile}/>
+                        <CreativeHistory creative={creative} onClickFile={openFile} onClickFileInfo={openFileInfo}/>
                     </PivotItem>
                     <PivotItem itemKey="jira">
                         <span>Pivot #3</span>
