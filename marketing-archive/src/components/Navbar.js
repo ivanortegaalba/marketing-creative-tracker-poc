@@ -4,7 +4,6 @@ import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { Icon, Link, getTheme } from "office-ui-fabric-react";
 import { withPrefix } from "gatsby";
-import { redirectTo } from "@reach/router";
 
 export default function NavBar() {
     const theme = getTheme();

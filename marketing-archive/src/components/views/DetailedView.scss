@@ -1,35 +1,53 @@
 .DetailedView {
-  height: 95vh;
-  display: grid;
-  grid-template-columns: 3fr 9fr;
-  grid-template-rows: 1fr 3fr 8fr;
-  grid-template-areas:
-    "header  tabs"
-    "preview content"
-    "metadata  content";
+    height: 92.7vh;
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    grid-template-rows: 1fr 3fr 8fr;
+    grid-template-areas:
+        "header  tabs"
+        "preview content"
+        "metadata  content";
 
-  &-header {
-    grid-area: header;
-    background-color: white;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
+    &-header {
+        grid-area: header;
+        background-color: white;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
 
-  &-preview {
-    grid-area: preview;
-  }
+    &-preview {
+        grid-area: preview;
+    }
 
-  &-metadata {
-    grid-area: metadata;
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
+    &-metadata {
+        grid-area: metadata;
+        overflow-x: hidden;
+        overflow-y: scroll;
 
-  &-folders {
-    grid-area: content;
-    padding: 0;
-    overflow: scroll;
-  }
+        background: linear-gradient(white 30%, hsla(0, 0%, 100%, 0)),
+            linear-gradient(hsla(0, 0%, 100%, 0) 10px, white 70%) bottom,
+            radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
+            radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%)
+                bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 20px, 100% 20px, 100% 10px, 100% 10px;
+        background-attachment: local, local, scroll, scroll;
+    }
+
+    &-folders {
+        grid-area: content;
+        padding: 0;
+        overflow: scroll;
+        background: linear-gradient(
+                rgb(243, 242, 241) 30%,
+                hsla(0, 0%, 100%, 0)
+            ),
+            linear-gradient(hsla(0, 0%, 100%, 0) 10px, rgb(243, 242, 241) 70%)
+                bottom,
+            radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
+            radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%)
+                bottom;
+    }
 }

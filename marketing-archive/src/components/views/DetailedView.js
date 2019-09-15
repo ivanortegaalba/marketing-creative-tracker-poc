@@ -9,6 +9,9 @@ import {
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { FilesList, Metadata } from "..";
 import { creative as getCreative } from "../../data";
+import { getTheme } from "@uifabric/styling";
+
+const theme = getTheme();
 
 export default function DetailedView() {
     const creative = getCreative();
@@ -52,7 +55,7 @@ export default function DetailedView() {
                     linkFormat={PivotLinkFormat.links}
                     linkSize={PivotLinkSize.large}
                     selectedKey={activeTab}
-                    onLinkClick={(item) => setActiveTab(item.props.itemKey)}
+                    onLinkClick={item => setActiveTab(item.props.itemKey)}
                     headersOnly={true}
                 >
                     <PivotItem headerText="Files" itemKey="files"></PivotItem>
@@ -63,8 +66,16 @@ export default function DetailedView() {
                     <PivotItem headerText="JIRA" itemKey="jira"></PivotItem>
                 </Pivot>
             </div>
-            <div className="DetailedView-folders">
-                <Pivot selectedKey={activeTab} styles={{root: {display:"none"}}}>
+            <div
+                className="DetailedView-folders"
+                style={{
+                    backgroundColor: theme.palette.neutralLighter
+                }}
+            >
+                <Pivot
+                    selectedKey={activeTab}
+                    styles={{ root: { display: "none" } }}
+                >
                     <PivotItem itemKey="files">
                         <FilesList creative={creative} />
                     </PivotItem>
