@@ -6,20 +6,15 @@ import {
     PivotLinkSize,
     PivotLinkFormat
 } from "office-ui-fabric-react/lib/Pivot";
-import {
-    DocumentCard,
-    DocumentCardActivity,
-    DocumentCardDetails,
-    DocumentCardPreview,
-    DocumentCardTitle,
-    DocumentCardType,
-    DocumentCardLocation
-} from "office-ui-fabric-react/lib/DocumentCard";
 import { Text } from "office-ui-fabric-react/lib/Text";
-import { Stack } from "office-ui-fabric-react/lib/Stack";
 import { getTheme } from "@uifabric/styling";
-import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
-import { FilesList, Metadata } from "..";
+import {
+    FilesList,
+    Metadata,
+    CreativeHistory,
+    FileDetailsPanel,
+    FileOverview
+} from "..";
 import { creative as getCreative } from "../../data";
 
 export default function DetailedView() {
@@ -27,6 +22,8 @@ export default function DetailedView() {
 
     const creative = getCreative();
     const [activeTab, setActiveTab] = useState("files");
+    const [openedFile, openFile] = useState(null);
+    const [openedFileInfo, openFileInfo] = useState(null);
 
     return (
         <div className="DetailedView">
@@ -88,188 +85,33 @@ export default function DetailedView() {
                     styles={{ root: { display: "none" } }}
                 >
                     <PivotItem itemKey="files">
-                        <FilesList creative={creative} />
+                        <FilesList
+                            creative={creative}
+                            openFile={openFile}
+                            openFileInfo={openFileInfo}
+                        />
                     </PivotItem>
                     <PivotItem itemKey="history">
-                        <CreativeHistory creative={creative} />
+                        <CreativeHistory creative={creative} onClickFile={openFile}/>
                     </PivotItem>
                     <PivotItem itemKey="jira">
                         <span>Pivot #3</span>
                     </PivotItem>
                 </Pivot>
             </div>
+            <FileDetailsPanel
+                onDismiss={() => openFileInfo(null)}
+                creative={creative}
+                file={openedFileInfo}
+                isOpen={!!openedFileInfo}
+            />
+            <FileOverview
+                onDismiss={() => openFile(null)}
+                creative={creative}
+                file={openedFile}
+                changeFile={openFile}
+                isOpen={!!openedFile}
+            />
         </div>
-    );
-}
-
-function CreativeHistory({ creative }) {
-    const theme = getTheme();
-
-    return (
-        <Timeline lineColor={theme.palette.neutralLight}>
-            <TimelineItem
-                key={"el0"}
-                dateText={"Today"}
-                style={{ color: theme.palette.themePrimary }}
-                dateInnerStyle={{
-                    background: theme.semanticColors.primaryButtonBackground,
-                    color: theme.semanticColors.primaryButtonText,
-                }}
-            >
-                <Stack
-                    tokens={{
-                        childrenGap: "16px 0"
-                    }}
-                >
-                    <Text variant="xLarge">New versions</Text>
-                    {creative.files.slice(0, 3).map((file, idx) => {
-                        return (
-                            <DocumentCard type={DocumentCardType.compact}>
-                                <DocumentCardPreview
-                                    previewImages={[
-                                        {
-                                            name: file.name,
-                                            previewImageSrc: file.preview.src,
-                                            iconSrc: file.fileType.icon.small,
-                                            width: 144
-                                        }
-                                    ]}
-                                />
-                                <DocumentCardDetails>
-                                    <DocumentCardTitle
-                                        title={file.name}
-                                        shouldTruncate={true}
-                                    />
-                                    <DocumentCardLocation
-                                        location={`Version ${file.version}`}
-                                    />
-                                    <DocumentCardActivity
-                                        activity="Created a few minutes ago"
-                                        people={[
-                                            {
-                                                profileImageSrc:
-                                                    file.authors[0].avatar,
-                                                name: file.authors[0].name
-                                            }
-                                        ]}
-                                    />
-                                </DocumentCardDetails>
-                            </DocumentCard>
-                        );
-                    })}
-                </Stack>
-            </TimelineItem>
-            <TimelineItem
-                key={"el1"}
-                dateText={"Yesterday"}
-                style={{ color: theme.palette.themePrimary }}
-                dateInnerStyle={{
-                    background: theme.semanticColors.primaryButtonBackground,
-                    color: theme.semanticColors.primaryButtonText
-                }}
-            >
-                <Stack
-                    tokens={{
-                        childrenGap: "16px"
-                    }}
-                >
-                    <Text variant="xLarge">New versions</Text>
-                    {creative.files.slice(3, 6).map((file, idx) => {
-                        return (
-                            <DocumentCard
-                                key={idx}
-                                type={DocumentCardType.compact}
-                            >
-                                <DocumentCardPreview
-                                    previewImages={[
-                                        {
-                                            name: file.name,
-                                            previewImageSrc: file.preview.src,
-                                            iconSrc: file.fileType.icon.small,
-                                            width: 144
-                                        }
-                                    ]}
-                                />
-                                <DocumentCardDetails>
-                                    <DocumentCardTitle
-                                        title={file.name}
-                                        shouldTruncate={true}
-                                    />
-                                    <DocumentCardLocation
-                                        location={`Version ${file.version}`}
-                                    />
-                                    <DocumentCardActivity
-                                        activity="Created a few minutes ago"
-                                        people={[
-                                            {
-                                                profileImageSrc:
-                                                    file.authors[0].avatar,
-                                                name: file.authors[0].name
-                                            }
-                                        ]}
-                                    />
-                                </DocumentCardDetails>
-                            </DocumentCard>
-                        );
-                    })}
-                </Stack>
-            </TimelineItem>
-            <TimelineItem
-                key={"el1"}
-                dateText={"This week"}
-                style={{ color: theme.palette.themePrimary }}
-                dateInnerStyle={{
-                    background: theme.semanticColors.primaryButtonBackground,
-                    color: theme.semanticColors.primaryButtonText
-                }}
-            >
-                <Stack
-                    tokens={{
-                        childrenGap: "16px"
-                    }}
-                >
-                    <Text variant="xLarge">New versions</Text>
-                    {creative.files.slice(6, 9).map((file, idx) => {
-                        return (
-                            <DocumentCard
-                                key={idx}
-                                type={DocumentCardType.compact}
-                            >
-                                <DocumentCardPreview
-                                    previewImages={[
-                                        {
-                                            name: file.name,
-                                            previewImageSrc: file.preview.src,
-                                            iconSrc: file.fileType.icon.small,
-                                            width: 144
-                                        }
-                                    ]}
-                                />
-                                <DocumentCardDetails>
-                                    <DocumentCardTitle
-                                        title={file.name}
-                                        shouldTruncate={true}
-                                    />
-                                    <DocumentCardLocation
-                                        location={`Version ${file.version}`}
-                                    />
-                                    <DocumentCardActivity
-                                        activity="Created a few minutes ago"
-                                        people={[
-                                            {
-                                                profileImageSrc:
-                                                    file.authors[0].avatar,
-                                                name: file.authors[0].name
-                                            }
-                                        ]}
-                                    />
-                                </DocumentCardDetails>
-                            </DocumentCard>
-                        );
-                    })}
-                </Stack>
-            </TimelineItem>
-
-        </Timeline>
     );
 }

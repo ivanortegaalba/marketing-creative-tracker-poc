@@ -90,6 +90,11 @@ export default function FileOverview(props) {
         }
     }
 
+    function resetFile() {
+        setComments(DEFAULT_COMMENTS)
+        setAnnotations([])
+    }
+
     function nextFile() {
         const nextCursor = cursor + 1;
 
@@ -98,6 +103,7 @@ export default function FileOverview(props) {
         }
 
         moveCursor(nextCursor);
+        resetFile();
         return changeFile(creative.files[nextCursor]);
     }
 
@@ -109,6 +115,7 @@ export default function FileOverview(props) {
         }
 
         moveCursor(prevCursor);
+        resetFile();
         return changeFile(creative.files[prevCursor]);
     }
 

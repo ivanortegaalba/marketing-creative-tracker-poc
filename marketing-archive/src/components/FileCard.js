@@ -14,7 +14,7 @@ const PREVIEW_WIDTH = 300;
 const PREVIEW_HEIGHT = 200;
 
 export default function FileCard(props) {
-    const { onClick, file } = props;
+    const { onClick, onClickInfo, file } = props;
     const previewProps = {
         previewImages: [
             {
@@ -66,7 +66,7 @@ export default function FileCard(props) {
                         ariaLabel: "Image Info",
                         onClick: e => {
                             e.stopPropagation();
-                            onClick(e);
+                            onClickInfo(e);
                         }
                     },
                     {

@@ -1,9 +1,7 @@
-import React, { useState, Fragment } from "react";
-import { FileCard, FileDetailsPanel, FileOverview } from ".";
+import React, { Fragment } from "react";
+import { FileCard } from ".";
 
-export default function FilesList({ creative }) {
-    const [openedFile, openFile] = useState(null);
-
+export default function FilesList({ creative, openFile, openFileInfo }) {
     return (
         <Fragment>
             <div className="FilesList">
@@ -15,23 +13,11 @@ export default function FilesList({ creative }) {
                             className="FilesList-item"
                             file={file}
                             onClick={() => openFile(file)}
+                            onClickInfo={() => openFileInfo(file)}
                         />
                     );
                 })}
             </div>
-            <FileDetailsPanel
-                onDismiss={() => openFile(null)}
-                creative={creative}
-                file={openedFile}
-                isOpen={false}
-            />
-            <FileOverview
-                onDismiss={() => openFile(null)}
-                creative={creative}
-                file={openedFile}
-                changeFile={openFile}
-                isOpen={!!openedFile}
-            />
         </Fragment>
     );
 }
