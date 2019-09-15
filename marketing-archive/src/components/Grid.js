@@ -10,7 +10,7 @@ export default function Grid(props) {
         <div
             className="Grid"
             style={{
-                backgroundColor: theme.palette.neutralLighter
+                backgroundColor: theme.palette.neutralLighterAlt
             }}
         >
             {children}

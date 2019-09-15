@@ -448,9 +448,12 @@ function Comments({ comments, onSubmit, setActiveAnnotation }) {
 function FileInfo({ file, creative }) {
     return (
         <Stack
-            verticalAlign="space-between"
-            verticalFill
-            grow
+            styles={{
+                root: {
+                    overflow: "scroll",
+                    height: "100%"
+                }
+            }}
             tokens={{
                 padding: "8px",
                 childrenGap: "16px"
@@ -511,8 +514,12 @@ function FileInfo({ file, creative }) {
 function History({ file }) {
     return (
         <Stack
-            verticalAlign="space-between"
-            verticalFill
+            styles={{
+                root: {
+                    overflow: "scroll",
+                    height: "100%"
+                }
+            }}
             grow
             tokens={{
                 padding: "16px 8px",

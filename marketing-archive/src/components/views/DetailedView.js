@@ -69,7 +69,7 @@ export default function DetailedView() {
             <div
                 className="DetailedView-folders"
                 style={{
-                    backgroundColor: theme.palette.neutralLighter
+                    backgroundColor: theme.palette.neutralLighterAlt
                 }}
             >
                 <Pivot
