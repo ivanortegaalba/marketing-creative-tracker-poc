@@ -30,7 +30,7 @@ export default function NavBar() {
                     }}
                 >
                     <Text
-                        variant="xLarge"
+                        variant="large"
                         styles={{
                             root: {
                                 display: "flex",
@@ -55,19 +55,6 @@ export default function NavBar() {
                 underlined
                 placeholder="Search"
                 iconProps={{ iconName: "Search" }}
-                styles={{
-                    // root: {
-                    //     backgroundColor: "transparent",
-                    //     minWidth: "500px",
-                    //     color: "white",
-                    //     borderColor: "white",
-                    //     selectors: {
-                    //         ":hover": {
-                    //             borderColor: "white"
-                    //         }
-                    //     }
-                    // }
-                }}
             />
         </Navbar>
     );

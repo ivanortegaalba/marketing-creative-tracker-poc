@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, ImageFit } from "office-ui-fabric-react/lib/Image";
 import {
     Pivot,
@@ -8,15 +8,16 @@ import {
 } from "office-ui-fabric-react/lib/Pivot";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { FilesList, Metadata } from "..";
-import { creative as getCreative} from "../../data";
+import { creative as getCreative } from "../../data";
 
 export default function DetailedView() {
     const creative = getCreative();
+    const [activeTab, setActiveTab] = useState("files");
 
     return (
         <div className="DetailedView">
             <div className="DetailedView-header">
-                <Text variant={"xxLarge"} nowrap>
+                <Text variant={"xLarge"} nowrap>
                     {creative.name}
                 </Text>
             </div>
@@ -32,7 +33,7 @@ export default function DetailedView() {
             <div className="DetailedView-metadata">
                 <Metadata creative={creative} />
             </div>
-            <div className="DetailedView-folders">
+            <div className="DetailedView-tabs">
                 <Pivot
                     styles={{
                         root: { display: "flex" },
@@ -50,14 +51,27 @@ export default function DetailedView() {
                     }}
                     linkFormat={PivotLinkFormat.links}
                     linkSize={PivotLinkSize.large}
+                    selectedKey={activeTab}
+                    onLinkClick={(item) => setActiveTab(item.props.itemKey)}
+                    headersOnly={true}
                 >
-                    <PivotItem headerText="Files">
+                    <PivotItem headerText="Files" itemKey="files"></PivotItem>
+                    <PivotItem
+                        headerText="History"
+                        itemKey="history"
+                    ></PivotItem>
+                    <PivotItem headerText="JIRA" itemKey="jira"></PivotItem>
+                </Pivot>
+            </div>
+            <div className="DetailedView-folders">
+                <Pivot selectedKey={activeTab} styles={{root: {display:"none"}}}>
+                    <PivotItem itemKey="files">
                         <FilesList creative={creative} />
                     </PivotItem>
-                    <PivotItem headerText="History">
+                    <PivotItem itemKey="history">
                         <span>Pivot #2</span>
                     </PivotItem>
-                    <PivotItem headerText="JIRA">
+                    <PivotItem itemKey="jira">
                         <span>Pivot #3</span>
                     </PivotItem>
                 </Pivot>
