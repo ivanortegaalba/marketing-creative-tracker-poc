@@ -147,31 +147,6 @@ export function CompactFileCard({ file, onClick, onClickInfo }) {
                             e.stopPropagation();
                             onClickInfo(e);
                         }
-                    },
-                    {
-                        menuIconProps: {
-                            iconName: "MoreVertical"
-                        },
-                        menuProps: {
-                            items: [
-                                {
-                                    key: "calendarEvent",
-                                    text: "Move to",
-                                    iconProps: { iconName: "MoveToFolder" }
-                                },
-                                {
-                                    key: "copy",
-                                    text: "Copy to",
-                                    iconProps: { iconName: "Copy" }
-                                },
-                                {
-                                    key: "delete",
-                                    text: "Delete",
-                                    iconProps: { iconName: "Delete" }
-                                }
-                            ]
-                        },
-                        ariaLabel: "download action"
                     }
                 ]}
             />

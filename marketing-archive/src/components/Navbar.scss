@@ -1,4 +1,8 @@
 .Navbar {
+    &-tools {
+        width: 100%;
+    }
+
     .ms-SearchBox,
     .ms-SearchBox:hover {
         background-color: transparent;

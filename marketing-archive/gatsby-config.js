@@ -24,5 +24,5 @@ module.exports = {
     /**
      * This is required to prefix the build with the name of the repo. This is used for Github pages
      */
-    pathPrefix: `/prototype`
+    pathPrefix: ``
 };

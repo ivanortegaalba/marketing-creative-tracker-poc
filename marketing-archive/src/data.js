@@ -120,6 +120,10 @@ export function author() {
     return utils.getRandomFromArray(COLLABORATORS);
 }
 
+export function currentUser() {
+    return OTHER_AUTHOR;
+}
+
 export function creativeType() {
     const CREATIVE_TYPES = [
         "Banner",
@@ -138,13 +142,13 @@ export function creativeType() {
 }
 
 export const FILE_TYPES = [
-    { id: "video", extension: "flv" },
+    // { id: "video", extension: "flv" },
     { id: "image", extension: "png" },
-    { id: "pdf-document", extension: "pdf" },
-    { id: "document", extension: "doc" },
-    { id: "gif", extension: "gif" },
-    { id: "audio", extension: "mp4" },
-    { id: "executable", extension: "exe" }
+    // { id: "pdf-document", extension: "pdf" },
+    // { id: "document", extension: "doc" },
+    // { id: "gif", extension: "gif" },
+    // { id: "audio", extension: "mp4" },
+    // { id: "executable", extension: "exe" }
 ];
 
 export const ICON_SIZES = {
@@ -170,6 +174,78 @@ export function fileType() {
     };
 }
 
+function history(file, nEntries = 1) {
+    const TYPE = {
+        VERSION: "version",
+        RENAMED: "renamed",
+        COMMENT: "comment",
+        REQUEST_CHANGES: "requestChanges",
+        APPROVED: "approved",
+    }
+
+    let versionCounter = 0;
+
+    return [
+        historyEntry(TYPE.VERSION),
+        ...Array.from(new Array(nEntries)).map(() => {
+            const entryType = utils.getRandomFromObject(TYPE);
+
+            return historyEntry(entryType);
+        })
+    ];
+
+    function historyEntry(type) {
+        const baseEntry = {
+            type,
+            author: author(),
+            createdAt: createdAt()
+        };
+        switch (type) {
+            case TYPE.VERSION:
+                return {
+                    ...baseEntry,
+                    version: ++versionCounter,
+                    versionNotes: "I uploaded a new version with the changes",
+                    get title() {
+                        return `created the version ${versionCounter}`;
+                    }
+                };
+            case TYPE.RENAMED:
+                return {
+                    ...baseEntry,
+                    get title() {
+                        return `${
+                            baseEntry.author.name
+                        } renamed the file`;
+                    }
+                };
+            case TYPE.COMMENT:
+                return {
+                    ...baseEntry,
+                    get title() {
+                        return `added a new comment`;
+                    }
+                };
+            case TYPE.REQUEST_CHANGES:
+                return {
+                    ...baseEntry,
+                    get title() {
+                        return `requested changes`;
+                    }
+                };
+            case TYPE.APPROVED:
+                return {
+                    ...baseEntry,
+                    get title() {
+                        return `approved changes`;
+                    }
+                };
+        }
+
+        throw Error(type)
+    }
+}
+
 export function file() {
     const dimensions = {
         width: (utils.getRandomNumber(5) + 2) * 100,
@@ -177,7 +253,7 @@ export function file() {
     };
     const type = fileType();
 
-    return {
+    const mock = {
         name: `${utils.toSnakeCase(utils.getRandomName())}.${type.extension}`,
         fileType: type,
         version: utils.getRandomNumber(10) + 1,
@@ -191,6 +267,11 @@ export function file() {
         dimensions,
         dpi: "300",
         tags: tags()
+    };
+
+    return {
+        ...mock,
+        history: history(mock, 10)
     };
 }
 

@@ -11,15 +11,12 @@ import { Panel, PanelType } from "office-ui-fabric-react/lib/Panel";
 import Annotation from "react-image-annotation";
 import { PointSelector } from "react-image-annotation/lib/selectors";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
-import {
-    Stack,
-    Label,
-    Link,
-    getTheme,
-    IconButton,
-    ActionButton
-} from "office-ui-fabric-react";
+import { Label, Link, IconButton, ActionButton } from "office-ui-fabric-react";
 import { TagList } from ".";
+import { Stack } from "office-ui-fabric-react/lib/Stack";
+import { getTheme } from "@uifabric/styling";
+import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
+import { CompactFileCard } from ".";
 import { author, createdAt, OTHER_AUTHOR } from "../data";
 
 const DEFAULT_COMMENTS = [
@@ -91,8 +88,8 @@ export default function FileOverview(props) {
     }
 
     function resetFile() {
-        setComments(DEFAULT_COMMENTS)
-        setAnnotations([])
+        setComments(DEFAULT_COMMENTS);
+        setAnnotations([]);
     }
 
     function nextFile() {
@@ -222,8 +219,7 @@ export default function FileOverview(props) {
                                             flex: 1
                                         },
                                         linkContent: {
-                                            overflow: "scroll",
-                                            height: "100%"
+                                            overflow: "scroll"
                                         }
                                     }}
                                     linkFormat={PivotLinkFormat.links}
@@ -235,7 +231,10 @@ export default function FileOverview(props) {
                                         />
                                     </PivotItem>
                                     <PivotItem headerText="History">
-                                        <History file={file} />
+                                        <History
+                                            file={file}
+                                            onClickFile={changeFile}
+                                        />
                                     </PivotItem>
                                     <PivotItem headerText="Comments">
                                         <Comments
@@ -518,7 +517,7 @@ function FileInfo({ file, creative }) {
     );
 }
 
-function History({ file }) {
+function HistoryD({ file }) {
     return (
         <Stack
             styles={{
@@ -584,5 +583,81 @@ function History({ file }) {
                 timeStamp="2 days ago"
             />
         </Stack>
+    );
+}
+
+export function History({ file, onClickFile, onClickFileInfo }) {
+    const theme = getTheme();
+
+    return (
+        <div>
+            <Timeline lineColor={theme.palette.neutralLight}>
+                {file.history.reverse().map(entry => {
+                    return (
+                        <TimelineItem
+                            key={"el0"}
+                            dateText={`Version ${entry.version}`}
+                            style={{ color: theme.palette.themePrimary }}
+                            dateInnerStyle={{
+                                background:
+                                    theme.semanticColors
+                                        .primaryButtonBackground,
+                                color: theme.semanticColors.primaryButtonText,
+                                display:
+                                    entry.type === "version"
+                                        ? undefined
+                                        : "none"
+                            }}
+                            dateStyle={{
+                                display:
+                                    entry.type === "version"
+                                        ? undefined
+                                        : "none"
+                            }}
+                        >
+                            <Stack
+                                tokens={{
+                                    childrenGap: "16px 0"
+                                }}
+                            >
+                                <ActivityItem
+                                    styles={{
+                                        root: {
+                                            color: theme.semanticColors.bodyText
+                                        }
+                                    }}
+                                    activityDescription={
+                                        <Fragment>
+                                            <Link>{`${entry.author.name}`}</Link>
+                                            <span>{` ${entry.title}`}</span>
+                                        </Fragment>
+                                    }
+                                    activityPersonas={[
+                                        { imageUrl: entry.author.avatar }
+                                    ]}
+                                    comments={
+                                        entry.versionNotes && (
+                                            <span
+                                                style={{ fontStyle: "italic" }}
+                                            >
+                                                {entry.versionNotes}
+                                            </span>
+                                        )
+                                    }
+                                    timeStamp={entry.createdAt}
+                                />
+                                {entry.type === "version" && (
+                                    <CompactFileCard
+                                        key={file.name}
+                                        file={file}
+                                        hideActions
+                                    />
+                                )}
+                            </Stack>
+                        </TimelineItem>
+                    );
+                })}
+            </Timeline>
+        </div>
     );
 }
