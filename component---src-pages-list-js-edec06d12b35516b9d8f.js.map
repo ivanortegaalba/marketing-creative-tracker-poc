@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/pages/list.js"],"names":["IndexPage"],"mappings":"0FAAA,oBAEeA,YAAf","file":"component---src-pages-list-js-edec06d12b35516b9d8f.js","sourcesContent":["import IndexPage from './index';\n\nexport default IndexPage;\n"],"sourceRoot":""}
