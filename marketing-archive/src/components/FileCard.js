@@ -16,7 +16,6 @@ const PREVIEW_WIDTH = 300;
 const PREVIEW_HEIGHT = 200;
 
 export default function FileCard({ className, onClick, onClickInfo, file }) {
-
     return (
         <DocumentCard
             className={className}
@@ -45,7 +44,7 @@ export default function FileCard({ className, onClick, onClickInfo, file }) {
                 }))}
             />
             <DocumentCardLocation
-                location={`Version ${parseInt(Math.random() * 10)}`}
+                location={`Version ${file.version}`}
                 locationHref="#"
                 ariaLabel="Version"
             />
@@ -54,7 +53,12 @@ export default function FileCard({ className, onClick, onClickInfo, file }) {
                     {
                         iconProps: { iconName: "Download" },
                         primary: true,
-                        ariaLabel: "donwload"
+                        ariaLabel: "donwload",
+                        href: file.preview.src,
+                        target:'_blank',
+                        onClick: e => {
+                            e.stopPropagation();
+                        }
                     },
                     {
                         iconProps: { iconName: "Share" },
