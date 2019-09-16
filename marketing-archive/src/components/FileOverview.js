@@ -12,29 +12,15 @@ import Annotation from "react-image-annotation";
 import { PointSelector } from "react-image-annotation/lib/selectors";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Label, Link, IconButton, ActionButton } from "office-ui-fabric-react";
-import { TagList } from ".";
+import { TagList, FileHistory } from ".";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
 import { getTheme } from "@uifabric/styling";
-import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
-import { CompactFileCard } from ".";
 import { author, createdAt, OTHER_AUTHOR } from "../data";
 
 const DEFAULT_COMMENTS = [
     {
         author: author(),
-        message: "lore ipsum lorem",
-        createdAt: createdAt(),
-        annotation: null
-    },
-    {
-        author: author(),
-        message: "lore ipsum lorem",
-        createdAt: createdAt(),
-        annotation: null
-    },
-    {
-        author: author(),
-        message: "lore ipsum lorem",
+        message: "This is a example comment",
         createdAt: createdAt(),
         annotation: null
     }
@@ -128,7 +114,6 @@ export default function FileOverview(props) {
             annotation
         };
         setAnnotations([...annotations, annotation]);
-        console.log(">>>", commentAsAnnotation);
         addComment(commentAsAnnotation);
     }
 
@@ -231,9 +216,10 @@ export default function FileOverview(props) {
                                         />
                                     </PivotItem>
                                     <PivotItem headerText="History">
-                                        <History
+                                        <FileHistory
                                             file={file}
                                             onClickFile={changeFile}
+                                            onClickInfo={changeFile}
                                         />
                                     </PivotItem>
                                     <PivotItem headerText="Comments">
@@ -280,7 +266,6 @@ function ImageEditor({ image, annotations, addAnnotation, activeAnnotation }) {
             alt="Two pebbles anthropomorphized holding hands"
             annotations={annotations}
             activeAnnotationComparator={(a, b) => {
-                console.log("COMPARATOR", a, b);
                 return a.data.id === b;
             }}
             activeAnnotations={activeAnnotation ? [activeAnnotation] : null}
@@ -514,150 +499,5 @@ function FileInfo({ file, creative }) {
                 <TagList tags={file.tags} />
             </Stack.Item>
         </Stack>
-    );
-}
-
-function HistoryD({ file }) {
-    return (
-        <Stack
-            styles={{
-                root: {
-                    overflow: "scroll",
-                    height: "100%"
-                }
-            }}
-            grow
-            tokens={{
-                padding: "16px 8px",
-                childrenGap: "16px"
-            }}
-        >
-            <ActivityItem
-                activityDescription={
-                    <Fragment>
-                        <Link>{file.authors[0].name}</Link>
-                        <span> created the </span>
-                        <Link>version 2</Link> of
-                        <Link> {file.name}</Link>
-                    </Fragment>
-                }
-                activityPersonas={[
-                    { imageUrl: file.fileType.icon.small },
-                    { imageUrl: file.authors[1].avatar }
-                ]}
-                comments={
-                    <Fragment>
-                        <span style={{ fontStyle: "italic" }}>
-                            Upload the first stable version of the banner with
-                            the product requirement
-                        </span>
-                    </Fragment>
-                }
-                timeStamp="23m ago"
-            />
-            <ActivityItem
-                activityDescription={
-                    <Fragment>
-                        <Link>{file.authors[0].name}</Link>
-                        <span> renamed </span>
-                        <Link>first_upload.png</Link> to{" "}
-                        <Link> {file.name}</Link>
-                    </Fragment>
-                }
-                activityPersonas={[{ imageUrl: file.authors[0].avatar }]}
-                timeStamp="1h ago"
-            />
-            <ActivityItem
-                activityDescription={
-                    <Fragment>
-                        <Link>{file.authors[0].name}</Link>
-                        <span> created the </span>
-                        <Link>version 1</Link> of
-                        <Link> first_upload.png</Link>
-                    </Fragment>
-                }
-                activityPersonas={[
-                    { imageUrl: file.fileType.icon.small },
-                    { imageUrl: file.authors[0].avatar }
-                ]}
-                timeStamp="2 days ago"
-            />
-        </Stack>
-    );
-}
-
-export function History({ file, onClickFile, onClickFileInfo }) {
-    const theme = getTheme();
-
-    return (
-        <div>
-            <Timeline lineColor={theme.palette.neutralLight}>
-                {file.history.reverse().map(entry => {
-                    return (
-                        <TimelineItem
-                            key={"el0"}
-                            dateText={`Version ${entry.version}`}
-                            style={{ color: theme.palette.themePrimary }}
-                            dateInnerStyle={{
-                                background:
-                                    theme.semanticColors
-                                        .primaryButtonBackground,
-                                color: theme.semanticColors.primaryButtonText,
-                                display:
-                                    entry.type === "version"
-                                        ? undefined
-                                        : "none"
-                            }}
-                            dateStyle={{
-                                display:
-                                    entry.type === "version"
-                                        ? undefined
-                                        : "none"
-                            }}
-                        >
-                            <Stack
-                                tokens={{
-                                    childrenGap: "16px 0"
-                                }}
-                            >
-                                <ActivityItem
-                                    styles={{
-                                        root: {
-                                            color: theme.semanticColors.bodyText
-                                        }
-                                    }}
-                                    activityDescription={
-                                        <Fragment>
-                                            <Link>{`${entry.author.name}`}</Link>
-                                            <span>{` ${entry.title}`}</span>
-                                        </Fragment>
-                                    }
-                                    activityPersonas={[
-                                        { imageUrl: entry.author.avatar }
-                                    ]}
-                                    comments={
-                                        entry.versionNotes && (
-                                            <span
-                                                style={{ fontStyle: "italic" }}
-                                            >
-                                                {entry.versionNotes}
-                                            </span>
-                                        )
-                                    }
-                                    timeStamp={entry.createdAt}
-                                />
-                                {entry.type === "version" && (
-                                    <CompactFileCard
-                                        key={file.name}
-                                        file={file}
-                                        hideActions
-                                    />
-                                )}
-                            </Stack>
-                        </TimelineItem>
-                    );
-                })}
-            </Timeline>
-        </div>
     );
 }

@@ -10,3 +10,4 @@ export { default as TagList } from './TagList';
 export { default as FileDetailsPanel } from './FileDetailsPanel';
 export { default as FileOverview } from './FileOverview';
 export { default as CreativeHistory } from './CreativeHistory';
+export { default as FileHistory } from './FileHistory';

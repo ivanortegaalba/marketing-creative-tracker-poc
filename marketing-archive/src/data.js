@@ -143,7 +143,7 @@ export function creativeType() {
 
 export const FILE_TYPES = [
     // { id: "video", extension: "flv" },
-    { id: "image", extension: "png" },
+    { id: "image", extension: "png" }
     // { id: "pdf-document", extension: "pdf" },
     // { id: "document", extension: "doc" },
     // { id: "gif", extension: "gif" },
@@ -180,8 +180,8 @@ function history(file, nEntries = 1) {
         RENAMED: "renamed",
         COMMENT: "comment",
         REQUEST_CHANGES: "requestChanges",
-        APPROVED: "approved",
-    }
+        APPROVED: "approved"
+    };
 
     let versionCounter = 0;
 
@@ -214,9 +214,7 @@ function history(file, nEntries = 1) {
                 return {
                     ...baseEntry,
                     get title() {
-                        return `${
-                            baseEntry.author.name
-                        } renamed the file`;
+                        return `${baseEntry.author.name} renamed the file`;
                     }
                 };
             case TYPE.COMMENT:
@@ -240,9 +238,9 @@ function history(file, nEntries = 1) {
                         return `approved changes`;
                     }
                 };
+            default:
+                return baseEntry;
         }
-
-        throw Error(type)
     }
 }
 
