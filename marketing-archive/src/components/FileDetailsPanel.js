@@ -1,13 +1,6 @@
-import React, { Fragment } from "react";
-import {
-    Pivot,
-    PivotItem,
-    PivotLinkSize,
-    PivotLinkFormat
-} from "office-ui-fabric-react/lib/Pivot";
+import React from "react";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { Persona, PersonaSize } from "office-ui-fabric-react/lib/Persona";
-import { ActivityItem } from "office-ui-fabric-react/lib/ActivityItem";
 import { Panel, PanelType } from "office-ui-fabric-react/lib/Panel";
 import { Stack, Label, Link } from "office-ui-fabric-react";
 import { TagList } from ".";
@@ -50,29 +43,7 @@ export default function FileDetailsPanel(props) {
                             </Stack.Item>
                         </Stack>
                     </Stack.Item>
-                    <Pivot
-                        styles={{
-                            root: { display: "flex" },
-                            link: {
-                                flex: 1
-                            },
-                            linkIsSelected: {
-                                flex: 1
-                            },
-                            linkContent: {
-                                overflow: "scroll"
-                            }
-                        }}
-                        linkFormat={PivotLinkFormat.links}
-                        linkSize={PivotLinkSize.large}
-                    >
-                        <PivotItem headerText="Info">
-                            <FileInfo file={file} creative={creative} />
-                        </PivotItem>
-                        <PivotItem headerText="History">
-                            <History file={file} />
-                        </PivotItem>
-                    </Pivot>
+                    <FileInfo file={file} creative={creative} />
                 </Stack>
             ) : null}
         </Panel>
@@ -128,73 +99,8 @@ function FileInfo({ file, creative }) {
             </Stack.Item>
             <Stack.Item>
                 <Label>Tags</Label>
-                <TagList tags={file.tags}/>
+                <TagList tags={file.tags} />
             </Stack.Item>
-        </Stack>
-    );
-}
-
-function History({ file }) {
-    return (
-        <Stack
-            verticalAlign="space-between"
-            verticalFill
-            grow
-            tokens={{
-                padding: "16px 8px",
-                childrenGap: "16px"
-            }}
-        >
-            <ActivityItem
-                activityDescription={
-                    <Fragment>
-                        <Link>{file.authors[0].name}</Link>
-                        <span> created the </span>
-                        <Link>version 2</Link> of
-                        <Link> {file.name}</Link>
-                    </Fragment>
-                }
-                activityPersonas={[
-                    { imageUrl: file.fileType.icon.small },
-                    { imageUrl: file.authors[1].avatar }
-                ]}
-                comments={
-                    <Fragment>
-                        <span style={{ fontStyle: "italic" }}>
-                            Upload the first stable version of the banner with
-                            the product requirement
-                        </span>
-                    </Fragment>
-                }
-                timeStamp="23m ago"
-            />
-            <ActivityItem
-                activityDescription={
-                    <Fragment>
-                        <Link>{file.authors[0].name}</Link>
-                        <span> renamed </span>
-                        <Link>first_upload.png</Link> to {" "}
-                        <Link> {file.name}</Link>
-                    </Fragment>
-                }
-                activityPersonas={[{ imageUrl: file.authors[0].avatar }]}
-                timeStamp="1h ago"
-            />
-            <ActivityItem
-                activityDescription={
-                    <Fragment>
-                        <Link>{file.authors[0].name}</Link>
-                        <span> created the </span>
-                        <Link>version 1</Link> of
-                        <Link> first_upload.png</Link>
-                    </Fragment>
-                }
-                activityPersonas={[
-                    { imageUrl: file.fileType.icon.small },
-                    { imageUrl: file.authors[0].avatar }
-                ]}
-                timeStamp="2 days ago"
-            />
         </Stack>
     );
 }
