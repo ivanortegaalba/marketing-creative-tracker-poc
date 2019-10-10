@@ -13,7 +13,8 @@ import {
     Metadata,
     CreativeHistory,
     FileDetailsPanel,
-    FileOverview
+    FileOverview,
+    Analytics,
 } from "..";
 import { creative as getCreative } from "../../data";
 
@@ -71,7 +72,10 @@ export default function DetailedView() {
                         headerText="History"
                         itemKey="history"
                     ></PivotItem>
-                    <PivotItem headerText="JIRA" itemKey="jira"></PivotItem>
+                    <PivotItem
+                        headerText="Analytics"
+                        itemKey="analytics"
+                    ></PivotItem>
                 </Pivot>
             </div>
             <div
@@ -92,10 +96,14 @@ export default function DetailedView() {
                         />
                     </PivotItem>
                     <PivotItem itemKey="history">
-                        <CreativeHistory creative={creative} onClickFile={openFile} onClickFileInfo={openFileInfo}/>
+                        <CreativeHistory
+                            creative={creative}
+                            onClickFile={openFile}
+                            onClickFileInfo={openFileInfo}
+                        />
                     </PivotItem>
-                    <PivotItem itemKey="jira">
-                        <span>Pivot #3</span>
+                    <PivotItem itemKey="analytics">
+                        <Analytics></Analytics>
                     </PivotItem>
                 </Pivot>
             </div>
