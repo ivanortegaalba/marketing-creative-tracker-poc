@@ -36,12 +36,27 @@ export default function Analytics() {
         { i: "chart2", x: 0, y: 3, w: 12, h: 2, static: true }
     ];
 
+    const layoutsSingleCol = [
+        { i: "touchpoints", x: 0, y: 0, w: 1, h: 1, static: true },
+        { i: "installs", x: 0, y: 1, w: 1, h: 1, static: true },
+        { i: "conversion rate", x: 0, y: 2, w: 1, h: 1, static: true },
+        { i: "revenue", x: 0, y: 3, w: 1, h: 1, static: true },
+        { i: "chart", x: 0, y: 4, w: 1, h: 1, static: true },
+        { i: "chart2", x: 0, y: 5, w: 1, h: 1, static: true }
+    ];
+
     const dataService = new Data(uaData);
 
     return (
         <ResponsiveReactGridLayout
-            layouts={{ lg: layouts }}
-            cols={{ lg: 12, md: 6, sm: 4, xs: 1, xxs: 0 }}
+            layouts={{
+                lg: layouts,
+                md: layouts,
+                sm: layoutsSingleCol,
+                xs: layoutsSingleCol,
+                xxs: layoutsSingleCol
+            }}
+            cols={{ lg: 12, md: 12, sm: 1, xs: 1, xxs: 1 }}
             preventCollision={true}
         >
             <div key="touchpoints">
