@@ -1,10 +1,10 @@
 import React from "react"
-import { ProjectsView } from "../components/views"
+import { CreativesView } from "../components/views"
 import App from "../components/App"
 
 const IndexPage = () => (
   <App>
-    <ProjectsView />
+    <CreativesView />
   </App>
 )
 

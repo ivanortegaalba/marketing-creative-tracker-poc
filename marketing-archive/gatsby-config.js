@@ -1,8 +1,8 @@
 module.exports = {
     siteMetadata: {
-        title: `Marketing Archive - Tools For Games`,
-        description: `Platform to organize your marketing assets`,
-        author: `Tools For Games`
+        title: `Marketing Archive - Plural Engine`,
+        description: `Platform to organize and analyze your marketing assets`,
+        author: `Plural Engine`
     },
     plugins: [
         `gatsby-plugin-react-helmet`,

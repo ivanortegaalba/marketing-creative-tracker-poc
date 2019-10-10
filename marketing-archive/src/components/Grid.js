@@ -10,7 +10,10 @@ export default function Grid(props) {
         <div
             className="Grid"
             style={{
-                backgroundColor: theme.palette.neutralLighterAlt
+                backgroundColor: theme.palette.neutralLighterAlt,
+                gridTemplateColumns: props.colWidth
+                    ? `repeat(auto-fit, minmax(${props.colWidth}px, 1fr))`
+                    : undefined
             }}
         >
             {children}

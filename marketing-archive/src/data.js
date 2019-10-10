@@ -278,6 +278,7 @@ export function project() {
     return {
         id: projectName,
         name: projectName,
+        icon: 'https://picsum.photos/100/100.jpg',
         company: utils.toTitleCase(utils.getRandomName())
     };
 }
