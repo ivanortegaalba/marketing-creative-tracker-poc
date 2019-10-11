@@ -1,51 +1,82 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { CreativeCard, Grid } from "..";
 import { creative } from "../../data";
 
-const items = [
-    {
-        key: "newItem",
-        name: "New",
-        cacheKey: "myCacheKey", // changing this key will invalidate this items cache
-        iconProps: {
-            iconName: "Add"
-        },
-        ariaLabel: "New",
-        subMenuProps: {
-            items: [
-                {
-                    key: "newCollection",
-                    name: "Collection",
-                    iconProps: {
-                        iconName: "AssetLibrary"
+function getItems({ mode, setMode }) {
+    const items = [
+        {
+            key: "newItem",
+            name: "New",
+            cacheKey: "myCacheKey", // changing this key will invalidate this items cache
+            iconProps: {
+                iconName: "Add"
+            },
+            ariaLabel: "New",
+            subMenuProps: {
+                items: [
+                    {
+                        key: "newCollection",
+                        name: "Collection",
+                        iconProps: {
+                            iconName: "AssetLibrary"
+                        }
+                    },
+                    {
+                        key: "teamProject",
+                        name: "Project",
+                        iconProps: {
+                            iconName: "NewTeamProject"
+                        }
+                    },
+                    {
+                        key: "upload",
+                        name: "Upload file",
+                        iconProps: {
+                            iconName: "Upload"
+                        }
+                    },
+                    {
+                        key: "upload",
+                        name: "Upload folder",
+                        iconProps: {
+                            iconName: "BulkUpload"
+                        }
                     }
-                },
-                {
-                    key: "teamProject",
-                    name: "Project",
-                    iconProps: {
-                        iconName: "NewTeamProject"
-                    }
-                },
-                {
-                    key: "upload",
-                    name: "Upload file",
-                    iconProps: {
-                        iconName: "Upload"
-                    }
-                },
-                {
-                    key: "upload",
-                    name: "Upload folder",
-                    iconProps: {
-                        iconName: "BulkUpload"
-                    }
-                }
-            ]
+                ]
+            }
         }
+    ];
+    if (mode === MODES.CREATIVES) {
+        items.push({
+            key: "projectAnalytics",
+            name: "Analytics",
+            cacheKey: "analytics", // changing this key will invalidate this items cache
+            iconProps: {
+                iconName: "Chart"
+            },
+            ariaLabel: "New",
+            onClick: () => {
+                setMode(MODES.ANALYTICS);
+            }
+        });
+    } else {
+        items.push({
+            key: "creatives",
+            name: "Creatives",
+            cacheKey: "creatives", // changing this key will invalidate this items cache
+            iconProps: {
+                iconName: "StackIndicator"
+            },
+            ariaLabel: "New",
+            onClick: () => {
+                setMode(MODES.CREATIVES);
+            }
+        });
     }
-];
+
+    return items;
+}
 
 const overflowItems = [];
 
@@ -107,8 +138,15 @@ const farItems = [
 ];
 
 const creatives = Array.from(new Array(30)).map(creative);
+const MODES = {
+    ANALYTICS: "analytics",
+    CREATIVES: "creatives"
+};
 
 export default function ListView() {
+    const [mode, setMode] = useState(MODES.CREATIVES);
+    const items = getItems({ mode, setMode });
+
     return (
         <Fragment>
             <CommandBar

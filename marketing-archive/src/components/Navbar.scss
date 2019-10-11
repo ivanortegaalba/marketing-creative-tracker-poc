@@ -1,4 +1,6 @@
 .Navbar {
+    height: 42px;
+
     &-tools {
         width: 100%;
     }
@@ -9,6 +11,8 @@
         color: white;
         min-width: 50%;
         border-color: white;
+        height: 75%;
+        font-size: 12px;
     }
     .ms-SearchBox-icon {
         color: white;

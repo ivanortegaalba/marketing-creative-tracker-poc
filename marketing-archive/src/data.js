@@ -275,10 +275,11 @@ export function file() {
 
 export function project() {
     const projectName = utils.getRandomName();
+
     return {
         id: projectName,
         name: projectName,
-        icon: 'https://picsum.photos/100/100.jpg',
+        icon: `https://picsum.photos/100/100.jpg?random=${Math.random()}`,
         company: utils.toTitleCase(utils.getRandomName())
     };
 }

@@ -23,7 +23,7 @@ export default function NavBar() {
         <Navbar
             className="Navbar"
             expand="lg"
-            style={{ backgroundColor: theme.palette.themePrimary }}
+            style={{ backgroundColor: theme.palette.black }}
         >
             <Navbar.Brand className="Navbar-brand">
                 <Link
@@ -40,7 +40,7 @@ export default function NavBar() {
                     }}
                 >
                     <Text
-                        variant="large"
+                        variant="mediumPlus"
                         styles={{
                             root: {
                                 display: "flex",
@@ -53,11 +53,11 @@ export default function NavBar() {
                             styles={{
                                 root: {
                                     marginRight: "8px",
-                                    fontSize: "24px"
+                                    fontSize: "20px"
                                 }
                             }}
                         />
-                        Creative Archive > Game 1
+                        Plural Engine / Game 1 / My creative
                     </Text>
                 </Link>
             </Navbar.Brand>
@@ -66,6 +66,7 @@ export default function NavBar() {
                 className="Navbar-tools"
                 horizontalAlign="end"
                 tokens={{ childrenGap: "0 8px" }}
+                verticalAlign="center"
             >
                 <SearchBox
                     underlined
@@ -83,7 +84,7 @@ export default function NavBar() {
                     ariaLabel="Notification center"
                 />
                 <Persona
-                    size={PersonaSize.size32}
+                    size={PersonaSize.size24}
                     presence={PersonaPresence.online}
                     imageUrl={user.avatar}
                     imageAlt={user.name}

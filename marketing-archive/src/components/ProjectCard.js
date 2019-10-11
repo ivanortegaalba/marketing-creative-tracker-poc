@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import { navigate } from "gatsby";
 import {
     DocumentCard,
@@ -9,23 +10,23 @@ import {
 import { ImageFit } from "office-ui-fabric-react/lib/Image";
 
 export default function ProjectCard(props) {
-    const { project } = props;
+    const { className, project } = props;
 
     return (
         <DocumentCard
-            className="ProjectCard"
+            styles={{
+                root: {
+                    border: "none"
+                }
+            }}
+            className={cx("ProjectCard", className)}
             onClick={e => {
                 e.stopPropagation();
                 navigate("/project");
             }}
-            styles={{
-                root: {
-                    width: "100px"
-                }
-            }}
         >
             <DocumentCardImage
-                height={170}
+                height={150}
                 imageFit={ImageFit.center}
                 imageSrc={project.icon}
                 styles={{
@@ -34,12 +35,23 @@ export default function ProjectCard(props) {
                             img: {
                                 borderRadius: "25%"
                             }
-                        }
+                        },
+                        border: "none",
+                        backgroundColor: "transparent"
                     }
                 }}
             />
-            <DocumentCardDetails>
-                <DocumentCardTitle title={project.name} shouldTruncate showAsSecondaryTitle/>
+            <DocumentCardDetails styles={{ root: { border: "none" } }}>
+                <DocumentCardTitle
+                    title={project.name}
+                    shouldTruncate
+                    showAsSecondaryTitle
+                    styles={{
+                        root: {
+                            textAlign: "center"
+                        }
+                    }}
+                />
             </DocumentCardDetails>
         </DocumentCard>
     );
