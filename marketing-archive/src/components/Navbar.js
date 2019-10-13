@@ -57,7 +57,7 @@ export default function NavBar() {
                                 }
                             }}
                         />
-                        Plural Engine / Game 1 / My creative
+                        Plural Engine
                     </Text>
                 </Link>
             </Navbar.Brand>
