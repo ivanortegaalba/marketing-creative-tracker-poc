@@ -1,3 +1,16 @@
 .CreativeCard {
+    background-color: white;
 
+    &:hover {
+        cursor: pointer;
+    }
+
+    &-name,
+    &-footer {
+        padding: 8px;
+    }
+
+    &-author {
+        margin: 16px 16px 8px 16px;
+    }
 }

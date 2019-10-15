@@ -1,6 +1,5 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
-import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import {
     Icon,
@@ -22,7 +21,7 @@ export default function NavBar() {
     return (
         <Navbar
             className="Navbar"
-            expand="lg"
+            expand
             style={{ backgroundColor: theme.palette.black }}
         >
             <Navbar.Brand className="Navbar-brand">
@@ -68,10 +67,15 @@ export default function NavBar() {
                 tokens={{ childrenGap: "0 8px" }}
                 verticalAlign="center"
             >
-                <SearchBox
-                    underlined
-                    placeholder="Search"
+                <IconButton
+                    styles={{
+                        root: {
+                            color: "white"
+                        }
+                    }}
                     iconProps={{ iconName: "Search" }}
+                    title="Global search"
+                    ariaLabel="Global search"
                 />
                 <IconButton
                     styles={{

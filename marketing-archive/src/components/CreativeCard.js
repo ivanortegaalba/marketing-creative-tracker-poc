@@ -1,63 +1,69 @@
 import React from "react";
 import { navigate } from "gatsby";
-import {
-    DocumentCard,
-    DocumentCardActivity,
-    DocumentCardTitle,
-    DocumentCardDetails,
-    DocumentCardImage,
-    DocumentCardActions
-} from "office-ui-fabric-react/lib/DocumentCard";
-import { ImageFit } from "office-ui-fabric-react/lib/Image";
+import { Image, ImageFit } from "office-ui-fabric-react/lib/Image";
+import { Persona, PersonaSize } from "office-ui-fabric-react/lib/Persona";
+import { Text } from "office-ui-fabric-react/lib/Text";
+import { IconButton } from "office-ui-fabric-react/lib/Button";
+import { Stack } from "office-ui-fabric-react/lib/Stack";
+import utils from "../utils";
 
 export default function CreativeCard(props) {
     const { creative } = props;
 
     return (
-        <DocumentCard
+        <div
             className="CreativeCard"
             onClick={e => {
                 e.stopPropagation();
                 navigate("/creative");
             }}
         >
-            <DocumentCardImage
-                height={150}
-                imageFit={ImageFit.cover}
-                imageSrc={creative.preview.src}
-            />
-            <DocumentCardDetails>
-                <DocumentCardTitle title={creative.name} shouldTruncate />
-            </DocumentCardDetails>
-            <DocumentCardActivity
-                activity={creative.updatedAt}
-                people={creative.authors.map(author => {
-                    return {
-                        name: author.name,
-                        profileImageSrc: author.avatar
-                    };
-                })}
-            />
-            <DocumentCardActions
-                actions={[
-                    {
-                        iconProps: { iconName: "AddFavorite" },
-                        onClick: () => console.log({ ...arguments }),
-                        ariaLabel: "favorite action"
-                    },
-                    {
-                        iconProps: { iconName: "Share" },
-                        onClick: () => console.log({ ...arguments }),
-                        ariaLabel: "share action"
-                    },
-                    {
-                        iconProps: { iconName: "Download" },
-                        onClick: () => console.log({ ...arguments }),
-                        ariaLabel: "download action"
-                    }
-                ]}
-                views={parseInt(Math.random() * 100, 10)}
-            />
-        </DocumentCard>
+            <Stack
+                tokens={{
+                    childrenGap: "8px"
+                }}
+            >
+                <Image
+                    className="CreativeCard-preview"
+                    height={150}
+                    fit={ImageFit.cover}
+                    src={creative.preview.src}
+                    width="100%"
+                    alt="creative overview"
+                />
+                <Text className="CreativeCard-name" variant="mediumPlus">
+                    {creative.name}
+                </Text>
+                <Persona
+                    className="CreativeCard-author"
+                    text={creative.authors[0].name}
+                    secondaryText={creative.updatedAt}
+                    imageUrl={creative.authors[0].avatar}
+                    size={PersonaSize.size32}
+                />
+                <Stack horizontal className="CreativeCard-footer">
+                    <IconButton
+                        iconProps={{ iconName: "FavoriteStar" }}
+                        title="Favorite"
+                        ariaLabel="Favorite"
+                    />
+                    <IconButton
+                        iconProps={{ iconName: "Download" }}
+                        title="Download"
+                        ariaLabel="Download"
+                    />
+                    <Stack.Item grow={1}>
+                        <span />
+                    </Stack.Item>
+                    <Stack.Item>
+                        <Stack verticalAlign="center" verticalFill>
+                            <Text title="Return on Investment (ROI)">
+                                {utils.getRandomNumber(100)} %
+                            </Text>
+                        </Stack>
+                    </Stack.Item>
+                </Stack>
+            </Stack>
+        </div>
     );
 }

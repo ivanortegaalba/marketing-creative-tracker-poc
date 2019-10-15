@@ -1,7 +1,5 @@
-import React, { Fragment } from "react";
-import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
-import { Stack } from "office-ui-fabric-react/lib/Stack";
-import { ProjectCard, Grid } from "..";
+import React from "react";
+import { ProjectCard } from "..";
 import { project } from "../../data";
 
 const projects = Array.from(new Array(20)).map(project);

@@ -1,5 +1,5 @@
 .DetailedView {
-    height: 92.7vh;
+    height: 94.7vh;
     display: grid;
     grid-template-columns: 3fr 9fr;
     grid-template-rows: 1fr 3fr 8fr;
@@ -49,5 +49,31 @@
             radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
             radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%)
                 bottom;
+    }
+
+    @media only screen and (max-width: 500px) {
+        height: 100%;
+        display:flex;
+        flex-direction: column;
+
+        &-header {
+            order: 0;
+            flex: 1 0 50px;
+            padding: 8px;
+        }
+
+        &-preview {
+            display: none;
+        }
+
+        &-metadata {
+            order: 5;
+            flex: 1 0 300px;
+        }
+
+        &-folders {
+            order: 3;
+            flex: 1 0 400px;
+        }
     }
 }

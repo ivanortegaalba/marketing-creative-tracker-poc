@@ -41,8 +41,8 @@ export default function Analytics() {
         { i: "installs", x: 0, y: 1, w: 1, h: 1, static: true },
         { i: "conversion rate", x: 0, y: 2, w: 1, h: 1, static: true },
         { i: "revenue", x: 0, y: 3, w: 1, h: 1, static: true },
-        { i: "chart", x: 0, y: 4, w: 1, h: 1, static: true },
-        { i: "chart2", x: 0, y: 5, w: 1, h: 1, static: true }
+        { i: "chart", x: 0, y: 4, w: 1, h: 2, static: true },
+        { i: "chart2", x: 0, y: 6, w: 1, h: 2, static: true }
     ];
 
     const dataService = new Data(uaData);
