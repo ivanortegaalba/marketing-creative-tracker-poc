@@ -1,7 +1,6 @@
 import React from "react";
 import { navigate } from "gatsby";
 import { Image, ImageFit } from "office-ui-fabric-react/lib/Image";
-import { Persona, PersonaSize } from "office-ui-fabric-react/lib/Persona";
 import { Text } from "office-ui-fabric-react/lib/Text";
 import { IconButton } from "office-ui-fabric-react/lib/Button";
 import { Stack } from "office-ui-fabric-react/lib/Stack";
@@ -26,21 +25,16 @@ export default function CreativeCard(props) {
                 <Image
                     className="CreativeCard-preview"
                     height={150}
-                    fit={ImageFit.cover}
+                    fit={ImageFit.centerContain}
                     src={creative.preview.src}
                     width="100%"
                     alt="creative overview"
                 />
-                <Text className="CreativeCard-name" variant="mediumPlus">
-                    {creative.name}
-                </Text>
-                <Persona
-                    className="CreativeCard-author"
-                    text={creative.authors[0].name}
-                    secondaryText={creative.updatedAt}
-                    imageUrl={creative.authors[0].avatar}
-                    size={PersonaSize.size32}
-                />
+                <Stack.Item verticalFill>
+                    <Text className="CreativeCard-name" variant="mediumPlus">
+                        {creative.name}
+                    </Text>
+                </Stack.Item>
                 <Stack horizontal className="CreativeCard-footer">
                     <IconButton
                         iconProps={{ iconName: "FavoriteStar" }}

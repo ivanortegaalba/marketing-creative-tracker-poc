@@ -6,7 +6,6 @@ import { getTheme } from "@uifabric/styling";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import { CompactFileCard } from ".";
 
-
 export default function FileHistory({ file, onClickFile, onClickFileInfo }) {
     const theme = getTheme();
 
@@ -18,18 +17,17 @@ export default function FileHistory({ file, onClickFile, onClickFileInfo }) {
                         <TimelineItem
                             key={"el0"}
                             dateText={`Version ${entry.version}`}
-                            style={{ color: theme.palette.themePrimary }}
+                            style={{ color: theme.palette.black }}
                             dateInnerStyle={{
-                                background:
-                                    theme.semanticColors
-                                        .primaryButtonBackground,
-                                color: theme.semanticColors.primaryButtonText,
+                                background: 'transparent',
+                                color: theme.palette.black,
                                 display:
                                     entry.type === "version"
                                         ? undefined
                                         : "none"
                             }}
                             dateStyle={{
+                                background: theme.palette.neutralLighterAlt,
                                 display:
                                     entry.type === "version"
                                         ? undefined

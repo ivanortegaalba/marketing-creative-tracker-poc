@@ -17,10 +17,13 @@ export default function CreativeHistory({
             <TimelineItem
                 key={"el0"}
                 dateText={"Today"}
-                style={{ color: theme.palette.themePrimary }}
+                style={{ color: theme.palette.black }}
                 dateInnerStyle={{
-                    background: theme.semanticColors.primaryButtonBackground,
-                    color: theme.semanticColors.primaryButtonText
+                    background: "transparent",
+                    color: theme.palette.black,
+                }}
+                dateStyle={{
+                    background: theme.palette.neutralLight,
                 }}
             >
                 <Stack
@@ -44,10 +47,13 @@ export default function CreativeHistory({
             <TimelineItem
                 key={"el1"}
                 dateText={"Yesterday"}
-                style={{ color: theme.palette.themePrimary }}
+                style={{ color: theme.palette.black }}
                 dateInnerStyle={{
-                    background: theme.semanticColors.primaryButtonBackground,
-                    color: theme.semanticColors.primaryButtonText
+                    background: "transparent",
+                    color: theme.palette.black,
+                }}
+                dateStyle={{
+                    background: theme.palette.neutralLight,
                 }}
             >
                 <Stack
@@ -64,10 +70,13 @@ export default function CreativeHistory({
             <TimelineItem
                 key={"el2"}
                 dateText={"This week"}
-                style={{ color: theme.palette.themePrimary }}
+                style={{ color: theme.palette.black }}
                 dateInnerStyle={{
-                    background: theme.semanticColors.primaryButtonBackground,
-                    color: theme.semanticColors.primaryButtonText
+                    background: "transparent",
+                    color: theme.palette.black,
+                }}
+                dateStyle={{
+                    background: theme.palette.neutralLight,
                 }}
             >
                 <Stack
