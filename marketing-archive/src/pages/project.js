@@ -1,11 +1,13 @@
-import React from "react"
-import { CreativesView } from "../components/views"
-import App from "../components/App"
+import React from "react";
+import { CreativesView } from "../components/views";
+import App from "../components/App";
 
-const IndexPage = () => (
-  <App>
-    <CreativesView />
-  </App>
-)
+const IndexPage = props => {
+    return (
+        <App>
+            <CreativesView {...props} />
+        </App>
+    );
+};
 
-export default IndexPage
+export default IndexPage;

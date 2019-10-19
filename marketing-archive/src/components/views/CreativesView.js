@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { CreativeCard, Grid } from "..";
-import { creative } from "../../data";
+import { useStaticQuery, graphql } from "gatsby";
 
 function getItems({ mode, setMode }) {
     const items = [
@@ -137,15 +137,45 @@ const farItems = [
     }
 ];
 
-const creatives = Array.from(new Array(30)).map(creative);
+// const creatives = Array.from(new Array(30)).map(creative);
 const MODES = {
     ANALYTICS: "analytics",
     CREATIVES: "creatives"
 };
 
+function getCreatives(data) {
+    return data.allContentfulCreative.nodes.map(node => {
+        return {
+            id: node.id,
+            name: node.name,
+            preview: {
+                src: node.preview.file.url
+            }
+        };
+    });
+}
+
 export default function ListView() {
     const [mode, setMode] = useState(MODES.CREATIVES);
     const items = getItems({ mode, setMode });
+    const data = useStaticQuery(
+        graphql`
+            {
+                allContentfulCreative(sort: { order: ASC, fields: name }) {
+                    totalCount
+                    nodes {
+                        name
+                        preview {
+                            file {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+        `
+    );
+    const creatives = getCreatives(data);
 
     return (
         <Fragment>
