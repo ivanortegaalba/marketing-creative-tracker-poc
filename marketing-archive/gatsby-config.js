@@ -19,7 +19,14 @@ module.exports = {
         // To learn more, visit: https://gatsby.dev/offline
         // `gatsby-plugin-offline`,
         `gatsby-plugin-sass`,
-        `gatsby-plugin-fabric-ui`
+        `gatsby-plugin-fabric-ui`,
+        {
+            resolve: `gatsby-source-contentful`,
+            options: {
+                spaceId: "047ixe5ujrfp",
+                accessToken: "p630UiXxLITXtq-nU9GJBAXvLCoMiSoZ2_r0N30yGFM"
+            }
+        }
     ],
     /**
      * This is required to prefix the build with the name of the repo. This is used for Github pages
